@@ -1,0 +1,16 @@
+# private or generated, never commit
+notes-cards.js
+notes-cards.js.bak*
+*.bak*
+audio/
+_数据源/
+参考文档（有空再看）/
+_manifest.js
+_manifest.json
+gen_rejects.log
+抽查-*.csv
+__pycache__/
+*.mp3
+*.wav
+*.m4a
+.env

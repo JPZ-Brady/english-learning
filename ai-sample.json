@@ -1,0 +1,640 @@
+{
+ "get on with sb": {
+  "examples": [
+   {
+    "en": "Most of my housemates in Manchester are friendly, and I get on with them really well.",
+    "zh": "我在曼彻斯特的大部分室友都很友好，我和他们相处得非常好。"
+   },
+   {
+    "en": "Did you get on with your supervisor last term?",
+    "zh": "上学期你和导师相处得好吗？"
+   },
+   {
+    "en": "She didn't get on with the other students at first, but now they are close friends.",
+    "zh": "她起初和其他同学相处得不好，但现在他们已经是亲密的朋友了。"
+   }
+  ],
+  "quiz": {
+   "question": "I hope I can ____ my new flatmates.",
+   "options": [
+    "look after",
+    "get on with",
+    "fall out with",
+    "put up with"
+   ],
+   "answer": 1,
+   "answer_sentence": "I hope I can get on with my new flatmates."
+  },
+  "zh": "和…相处得好",
+  "date": "2026-10-25"
+ },
+ "find out": {
+  "examples": [
+   {
+    "en": "The police are still trying to find out who broke the window in the library.",
+    "zh": "警方仍在试图查明是谁打破了图书馆的窗户。"
+   },
+   {
+    "en": "Last week I found out that my tutorial had been moved to Thursday afternoon.",
+    "zh": "上周我发现导师讨论课已经改到周四下午了。"
+   },
+   {
+    "en": "We need to find out how much the bus fare to Oxford costs before we book the trip.",
+    "zh": "我们在订行程之前需要查明去牛津的巴士票价是多少。"
+   }
+  ],
+  "quiz": {
+   "question": "After checking the timetable twice, Lucy finally ____ that her exam had been moved to Monday.",
+   "options": [
+    "figured on",
+    "looked into",
+    "found out",
+    "pointed out"
+   ],
+   "answer": 2,
+   "answer_sentence": "After checking the timetable twice, Lucy finally found out that her exam had been moved to Monday."
+  },
+  "zh": "查明；发现",
+  "date": "2026-10-25"
+ },
+ "put sth off": {
+  "examples": [
+   {
+    "en": "Our group project got put off because two members were ill.",
+    "zh": "我们的小组项目因为两名成员生病而被推迟了。"
+   },
+   {
+    "en": "The smell of the cheap kebab really put me off, so I ordered something else.",
+    "zh": "那家廉价烤肉串的味道真让我倒胃口，所以我点了别的。"
+   },
+   {
+    "en": "Don't let the grey weather put you off visiting the Lake District; it's stunning even under cloud.",
+    "zh": "别因为阴天就让你对去湖区参观敬而远之；即使多云，那里也很美。"
+   }
+  ],
+  "quiz": {
+   "question": "Our tutor ____ the seminar until next week, so we had more time to read.",
+   "options": [
+    "put up with",
+    "put on",
+    "put off",
+    "put away"
+   ],
+   "answer": 2,
+   "answer_sentence": "Our tutor put off the seminar until next week, so we had more time to read."
+  },
+  "zh": "推迟；使反感",
+  "date": "2026-10-25"
+ },
+ "come across sb/sth": {
+  "examples": [
+   {
+    "en": "I came across an old school friend at the Bodleian Library in Oxford yesterday.",
+    "zh": "昨天我在牛津的博德利图书馆偶然遇到了一个老同学。"
+   },
+   {
+    "en": "Our new flatmate came across as very friendly, so we got on well straight away.",
+    "zh": "我们的新室友给人的印象很友善，所以我们一见如故。"
+   },
+   {
+    "en": "While revising for my exams, I came across a useful article on dissertation writing.",
+    "zh": "复习考试时，我偶然看到一篇关于论文写作的有用文章。"
+   }
+  ],
+  "quiz": {
+   "question": "Yesterday in the library, I ____ a lecturer I hadn't seen since my first term.",
+   "options": [
+    "came across",
+    "came about",
+    "came up with",
+    "came down with"
+   ],
+   "answer": 0,
+   "answer_sentence": "Yesterday in the library, I came across a lecturer I hadn't seen since my first term."
+  },
+  "zh": "偶然遇到；给人印象",
+  "date": "2026-10-25"
+ },
+ "give up": {
+  "examples": [
+   {
+    "en": "After three weeks of revision with barely any sleep, I almost gave up, but my flatmate persuaded me to keep going.",
+    "zh": "经过三周几乎没怎么睡觉的复习，我差点放弃，但室友劝我坚持下去。"
+   },
+   {
+    "en": "My friend finally managed to give up smoking after she moved to Manchester for her master's.",
+    "zh": "我朋友搬到曼彻斯特读硕士后，终于成功戒掉了烟。"
+   },
+   {
+    "en": "Don't give up on your dissertation; your supervisor says the draft is getting better every week.",
+    "zh": "别放弃你的论文，导师说初稿每周都在变好。"
+   }
+  ],
+  "quiz": {
+   "question": "I'm trying to ____ coffee, so I only drink tea now.",
+   "options": [
+    "set off",
+    "give up",
+    "pick up",
+    "look after"
+   ],
+   "answer": 1,
+   "answer_sentence": "I'm trying to give up coffee, so I only drink tea now."
+  },
+  "zh": "放弃；戒掉",
+  "date": "2026-10-25"
+ },
+ "bring sb up": {
+  "examples": [
+   {
+    "en": "After my parents moved abroad for work, my aunt brought me up in Shanghai.",
+    "zh": "父母出国工作后，是姑姑在上海抚养我长大的。"
+   },
+   {
+    "en": "At the seminar, one student brought up the issue of unpaid internships in the UK.",
+    "zh": "在研讨会上，一位同学提出了英国无薪实习的问题。"
+   },
+   {
+    "en": "My housemate brought up the topic of recycling during our house meeting, and everyone agreed to sort the rubbish better.",
+    "zh": "在我们的宿舍会议上，室友提出了垃圾回收的话题，大家都同意把垃圾分类做得更好。"
+   }
+  ],
+  "quiz": {
+   "question": "During the tutorial, my classmate ____ the topic of climate policy.",
+   "options": [
+    "brought up",
+    "put off",
+    "took off",
+    "looked up"
+   ],
+   "answer": 0,
+   "answer_sentence": "During the tutorial, my classmate brought up the topic of climate policy."
+  },
+  "zh": "抚养；提出话题",
+  "date": "2026-10-25"
+ },
+ "come up with sth": {
+  "examples": [
+   {
+    "en": "After hours of debate, our group finally came up with a solution to the housing problem.",
+    "zh": "经过几个小时的讨论，我们小组终于想出了解决住房问题的办法。"
+   },
+   {
+    "en": "During the seminar, Maria came up with a clever idea for her dissertation topic.",
+    "zh": "研讨会上，Maria 为她的论文题目想出了一个聪明的点子。"
+   },
+   {
+    "en": "The student union has come up with a new plan to reduce food waste in the halls.",
+    "zh": "学生会提出了一个新方案，用来减少宿舍食堂的食物浪费。"
+   }
+  ],
+  "quiz": {
+   "question": "Stuck on her essay for days, Lucy finally ____ a fresh argument about climate policy in the library.",
+   "options": [
+    "came up with",
+    "got on with",
+    "put up with",
+    "went along with"
+   ],
+   "answer": 0,
+   "answer_sentence": "Stuck on her essay for days, Lucy finally came up with a fresh argument about climate policy in the library."
+  },
+  "zh": "想出；提出",
+  "date": "2026-10-25"
+ },
+ "put up with sb/sth": {
+  "examples": [
+   {
+    "en": "My flatmate's loud music at midnight is hard to put up with, so I finally asked him to turn it down.",
+    "zh": "室友半夜放的大声音乐真让人难以忍受，所以我终于请他把声音调小。"
+   },
+   {
+    "en": "The professor refused to put up with late essays, so students had to submit their work on time.",
+    "zh": "教授不容忍迟交的论文，所以学生必须按时提交作业。"
+   },
+   {
+    "en": "How do you put up with the cold weather in Manchester during the winter?",
+    "zh": "冬天在曼彻斯特，你们是怎么忍受寒冷天气的？"
+   }
+  ],
+  "quiz": {
+   "question": "I can't ____ the noise from the flat upstairs any longer.",
+   "options": [
+    "put on",
+    "put up with",
+    "put away",
+    "put off"
+   ],
+   "answer": 1,
+   "answer_sentence": "I can't put up with the noise from the flat upstairs any longer."
+  },
+  "zh": "忍受；容忍",
+  "date": "2026-10-25"
+ },
+ "look forward to sth": {
+  "examples": [
+   {
+    "en": "I really look forward to my first reading week in Manchester.",
+    "zh": "我真的很期待在曼彻斯特的第一个阅读周。"
+   },
+   {
+    "en": "Many international students look forward to video calls with their families back home.",
+    "zh": "很多国际学生期待和远在家乡的家人视频通话。"
+   },
+   {
+    "en": "Are you looking forward to the group presentation next week?",
+    "zh": "你期待下周的小组展示吗？"
+   }
+  ],
+  "quiz": {
+   "question": "The students ____ the reading week break after months of essays.",
+   "options": [
+    "look after",
+    "look down on",
+    "look forward to",
+    "look up to"
+   ],
+   "answer": 2,
+   "answer_sentence": "The students look forward to the reading week break after months of essays."
+  },
+  "zh": "期待；盼望",
+  "date": "2026-10-25"
+ },
+ "go through sth": {
+  "examples": [
+   {
+    "en": "Many international students go through culture shock during their first month in London.",
+    "zh": "许多国际学生在伦敦的第一个月都会经历文化冲击。"
+   },
+   {
+    "en": "Before submitting my dissertation, I went through the references carefully to check for mistakes.",
+    "zh": "提交论文之前，我仔细检查了参考文献，看看有没有错误。"
+   },
+   {
+    "en": "My supervisor went through my draft line by line and marked every unclear sentence.",
+    "zh": "我的导师逐行仔细检查了我的草稿，并标出了每一句不清楚的句子。"
+   }
+  ],
+  "quiz": {
+   "question": "Before the exam, I asked my tutor to ____ my essay plan once more.",
+   "options": [
+    "go after",
+    "go through",
+    "go over with",
+    "go up"
+   ],
+   "answer": 1,
+   "answer_sentence": "Before the exam, I asked my tutor to go through my essay plan once more."
+  },
+  "zh": "经历；仔细检查",
+  "date": "2026-10-25"
+ },
+ "look sth up": {
+  "examples": [
+   {
+    "en": "I didn't recognise the term in my reading list, so I looked the term up in the online dictionary before my seminar.",
+    "zh": "我不认识阅读清单上的那个术语，所以在研讨课前先在网上词典里查阅了这个词。"
+   },
+   {
+    "en": "Things are finally looking up for our football team since we won the last two matches in the league.",
+    "zh": "自从我们在联赛中赢了最后两场比赛，我们的足球队终于好转了。"
+   },
+   {
+    "en": "Before the exam, I looked up the past papers in the university library and practised them every evening.",
+    "zh": "考试前，我在大学图书馆查阅了往年试卷，每天晚上都练习。"
+   }
+  ],
+  "quiz": {
+   "question": "Before the seminar, Sarah ____ in the library.",
+   "options": [
+    "turned the references down",
+    "looked the references up",
+    "looked after the references",
+    "gave the references up"
+   ],
+   "answer": 1,
+   "answer_sentence": "Before the seminar, Sarah looked the references up in the library."
+  },
+  "zh": "查阅；好转",
+  "date": "2026-10-25"
+ },
+ "take sth off": {
+  "examples": [
+   {
+    "en": "It was so warm inside the flat that I had to take my coat off at the door.",
+    "zh": "房间里太暖和了，我进门后只好在门口脱下外套。"
+   },
+   {
+    "en": "Our flight takes off at 7 a.m., so we need to leave Manchester by 4.",
+    "zh": "我们的航班早上7点起飞，所以得在凌晨4点前离开曼彻斯特。"
+   },
+   {
+    "en": "I'm going to take Friday off next week to finish my dissertation.",
+    "zh": "下周我打算请一天假（周五），把毕业论文写完。"
+   }
+  ],
+  "quiz": {
+   "question": "The plane ____ from Heathrow an hour late because of the fog.",
+   "options": [
+    "took up",
+    "took on",
+    "took off",
+    "took in"
+   ],
+   "answer": 2,
+   "answer_sentence": "The plane took off from Heathrow an hour late because of the fog."
+  },
+  "zh": "脱下；起飞；请假",
+  "date": "2026-10-25"
+ },
+ "put sth on": {
+  "examples": [
+   {
+    "en": "It's raining in Manchester, so I always put on a waterproof jacket before leaving my flat.",
+    "zh": "曼彻斯特经常下雨，所以我出门前总会穿上防水夹克。"
+   },
+   {
+    "en": "The university drama society put on Macbeth in the campus theatre last month.",
+    "zh": "上个月，大学戏剧社在校园剧场上演了《麦克白》。"
+   },
+   {
+    "en": "After Christmas I put on a few kilos from eating too much pasta and cake.",
+    "zh": "圣诞节后，我因为吃了太多意面和蛋糕，增重了好几公斤。"
+   }
+  ],
+  "quiz": {
+   "question": "It was freezing, so before going out, Lily ____ her coat and scarf.",
+   "options": [
+    "turned on",
+    "pulled up",
+    "put on",
+    "took off"
+   ],
+   "answer": 2,
+   "answer_sentence": "It was freezing, so before going out, Lily put on her coat and scarf."
+  },
+  "zh": "穿上；上演；增重",
+  "date": "2026-10-25"
+ },
+ "turn sth on": {
+  "examples": [
+   {
+    "en": "It's freezing in my room, so I turned on the heater before my lecture.",
+    "zh": "我房间冷得要命，所以上课前我打开了暖气。"
+   },
+   {
+    "en": "Could you turn on the kettle? I want to make a cup of tea.",
+    "zh": "你能打开水壶吗？我想泡杯茶。"
+   },
+   {
+    "en": "Every morning I turn on my laptop to check the emails from my department.",
+    "zh": "每天早上我都打开笔记本电脑，查看系里发来的邮件。"
+   }
+  ],
+  "quiz": {
+   "question": "I was cold, so I ____ the heater in my flat in Manchester.",
+   "options": [
+    "turned on",
+    "turned off",
+    "turned up",
+    "turned down"
+   ],
+   "answer": 0,
+   "answer_sentence": "I was cold, so I turned on the heater in my flat in Manchester."
+  },
+  "zh": "打开（电器）",
+  "date": "2026-10-25"
+ },
+ "put sth out": {
+  "examples": [
+   {
+    "en": "The fire brigade arrived within minutes and put out the fire in the kitchen before it spread.",
+    "zh": "消防队几分钟内就赶到了，在火势蔓延之前扑灭了厨房的火。"
+   },
+   {
+    "en": "The university put out a statement about the new library opening hours after students complained.",
+    "zh": "学生抱怨之后，大学发布了一份关于新图书馆开放时间的声明。"
+   },
+   {
+    "en": "Sorry to put you out, but could you give me a lift to the station? I've missed the bus.",
+    "zh": "很抱歉打扰你了，你能送我去车站吗？我错过了公交车。"
+   }
+  ],
+  "quiz": {
+   "question": "The firefighters arrived quickly and ____ the fire in the kitchen before it spread to the flat upstairs.",
+   "options": [
+    "put on",
+    "put out",
+    "put off",
+    "put up"
+   ],
+   "answer": 1,
+   "answer_sentence": "The firefighters arrived quickly and put out the fire in the kitchen before it spread to the flat upstairs."
+  },
+  "zh": "扑灭；发布；打扰",
+  "date": "2026-10-25"
+ },
+ "break down": {
+  "examples": [
+   {
+    "en": "My laptop broke down in the middle of my essay, and I lost two hours of work.",
+    "zh": "我的笔记本电脑在写论文写到一半时出故障了，我白白损失了两个小时的工作。"
+   },
+   {
+    "en": "After weeks of stress over deadlines and money, she finally broke down in tears in the library.",
+    "zh": "几周来她一直为截止日期和钱的事焦虑，最后在图书馆里崩溃大哭起来。"
+   },
+   {
+    "en": "Our seminar leader asked us to break down the argument into three main parts.",
+    "zh": "研讨会老师让我们把这个论点分解成三个主要部分。"
+   }
+  ],
+  "quiz": {
+   "question": "The old washing machine in our shared flat ____ last night, so we had to use the laundromat.",
+   "options": [
+    "set off",
+    "broke down",
+    "gave up",
+    "turned out"
+   ],
+   "answer": 1,
+   "answer_sentence": "The old washing machine in our shared flat broke down last night, so we had to use the laundromat."
+  },
+  "zh": "出故障；崩溃；分解",
+  "date": "2026-10-25"
+ },
+ "get sth back": {
+  "examples": [
+   {
+    "en": "I finally got my student card back from the porter after leaving it in the common room.",
+    "zh": "我把学生卡落在公共休息室后，终于从门房那里取回了它。"
+   },
+   {
+    "en": "You can get your deposit back at the end of the tenancy if the flat is clean.",
+    "zh": "如果公寓打扫干净，租期结束时你就能拿回押金。"
+   },
+   {
+    "en": "I need to get my library books back before the Friday deadline.",
+    "zh": "我得在周五的截止日期前把借的图书馆书籍拿回来。"
+   }
+  ],
+  "quiz": {
+   "question": "Yesterday I finally ____ from the lost property office after losing it on the bus.",
+   "options": [
+    "gave my bag away",
+    "handed in my bag",
+    "got my bag back",
+    "lost my bag again"
+   ],
+   "answer": 2,
+   "answer_sentence": "Yesterday I finally got my bag back from the lost property office after losing it on the bus."
+  },
+  "zh": "取回；拿回来",
+  "date": "2026-10-25"
+ },
+ "hang out (with sb)": {
+  "examples": [
+   {
+    "en": "We usually hang out in the common room after our seminars.",
+    "zh": "我们通常在研讨课结束后，在公共休息室一起消磨时间。"
+   },
+   {
+    "en": "Last weekend I hung out with my housemates at Camden Market.",
+    "zh": "上个周末，我和室友在卡姆登市场一起消磨时间。"
+   },
+   {
+    "en": "Do you want to hang out with us at the pub tonight?",
+    "zh": "今晚要不要和我们一起去酒吧消磨时间？"
+   }
+  ],
+  "quiz": {
+   "question": "After the exam, Mia and I ____ at the campus café for hours.",
+   "options": [
+    "found out",
+    "hung out",
+    "turned up",
+    "broke down"
+   ],
+   "answer": 1,
+   "answer_sentence": "After the exam, Mia and I hung out at the campus café for hours."
+  },
+  "zh": "一起消磨时间",
+  "date": "2026-10-25"
+ },
+ "deal with sth": {
+  "examples": [
+   {
+    "en": "I had to deal with a lot of paperwork before my visa was approved.",
+    "zh": "签证获批之前，我不得不处理大量的文件手续。"
+   },
+   {
+    "en": "Our tutor dealt with the late essay problem quickly and fairly.",
+    "zh": "导师迅速而公正地处理了逾期论文的问题。"
+   },
+   {
+    "en": "Students in London often have to deal with high rent and a busy schedule.",
+    "zh": "在伦敦的学生常常需要应对高昂的房租和繁忙的日程。"
+   }
+  ],
+  "quiz": {
+   "question": "The university office promised to ____ the issue with my accommodation by Friday.",
+   "options": [
+    "put up with",
+    "look after",
+    "run into",
+    "deal with"
+   ],
+   "answer": 3,
+   "answer_sentence": "The university office promised to deal with the issue with my accommodation by Friday."
+  },
+  "zh": "处理；应对",
+  "date": "2026-10-25"
+ },
+ "hand sth in": {
+  "examples": [
+   {
+    "en": "Remember to hand in your essay through the online portal by Friday at noon.",
+    "zh": "记得在周五中午前通过在线平台提交论文。"
+   },
+   {
+    "en": "Our lecturer asked us to hand in our group projects before the winter break.",
+    "zh": "讲师要求我们在寒假前上交小组项目。"
+   },
+   {
+    "en": "Did you hand in your scholarship application form yet? The deadline is tomorrow.",
+    "zh": "你交奖学金申请表了吗？截止日期是明天。"
+   }
+  ],
+  "quiz": {
+   "question": "The deadline is 5 p.m., so please ____ your coursework at the office before then.",
+   "options": [
+    "hand in",
+    "hand over",
+    "hand down",
+    "hand out"
+   ],
+   "answer": 0,
+   "answer_sentence": "The deadline is 5 p.m., so please hand in your coursework at the office before then."
+  },
+  "zh": "上交；提交",
+  "date": "2026-10-25"
+ },
+ "take sth up": {
+  "examples": [
+   {
+    "en": "Since moving to Manchester, I've decided to take up rowing at the university boathouse.",
+    "zh": "搬到曼彻斯特后，我决定在大学的船库开始学划船。"
+   },
+   {
+    "en": "The group project took up most of my weekends, so I barely had time to sleep.",
+    "zh": "小组项目占用了我大部分周末时间，我几乎没有时间睡觉。"
+   },
+   {
+    "en": "Once the exams finished, Lily took up pottery to relax between lectures.",
+    "zh": "考试结束后，莉莉开始学陶艺，在课间放松一下。"
+   }
+  ],
+  "quiz": {
+   "question": "I've decided to ____ the guitar this term, since my timetable is lighter.",
+   "options": [
+    "give up",
+    "take up",
+    "look up",
+    "set up"
+   ],
+   "answer": 1,
+   "answer_sentence": "I've decided to take up the guitar this term, since my timetable is lighter."
+  },
+  "zh": "开始学；占用",
+  "date": "2026-10-25"
+ },
+ "run out of sth": {
+  "examples": [
+   {
+    "en": "I ran out of credit on my phone, so I couldn't message my mum before the exam.",
+    "zh": "我手机话费用完了，所以考试前没法给妈妈发消息。"
+   },
+   {
+    "en": "We ran out of hot water in the halls during the morning rush.",
+    "zh": "早高峰时，宿舍的热水用完了。"
+   },
+   {
+    "en": "The printer in the library always runs out of paper near the end of term.",
+    "zh": "学期快结束时，图书馆的打印机总是用完纸。"
+   }
+  ],
+  "quiz": {
+   "question": "We ____ milk, so I popped to the corner shop for a pint.",
+   "options": [
+    "ran after",
+    "ran out of",
+    "ran into",
+    "ran away from"
+   ],
+   "answer": 1,
+   "answer_sentence": "We ran out of milk, so I popped to the corner shop for a pint."
+  },
+  "zh": "用完；耗尽",
+  "date": "2026-10-25"
+ }
+}

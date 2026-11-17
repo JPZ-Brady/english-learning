@@ -1,0 +1,24 @@
+﻿词,词库中文意思,用错词义的例句数（0-3）,翻译有错的例句数（0-3）,选择题有问题吗（0/1）,备注
+quid,英镑（口语，单复数同形）,0,0,0,
+order status,订单状态,0,0,0,
+extend,学术动词：拓展、扩展；常接to,0,0,0,题考的是词形（4 个选项都是 extend 的变形），不考词义
+deploy,部署,0,0,1,题：The team will ____ the new app next week，填 debug 或 download 也说得通
+you're a star,你太给力了,0,0,0,
+return to sender,退回寄件人,0,0,1,题：the courier ____ it back to the shop，填进 returned to sender 变成 returned to sender it back，不通；干扰项 sent it back 填进去也重复 it back
+a good egg,好人、靠得住的人,0,0,0,
+power cut,停电,0,0,0,
+nil,零（比分里）,0,0,1,题：beat Leeds 3-____，填 one 或 two 也对
+change the fuse,换保险丝,0,0,1,题：灯灭了，Tom ____ by torchlight，填 cooked the pasta 也说得通
+camera-ready,最终定稿版：录用后按模板排好上交的版本,0,0,0,
+Push / Pull,推 / 拉,1,0,0,例句 1 用的是 push in（插队），不是推的意思
+make a claim,提出索赔,0,0,0,
+reset the fuse box,把配电箱复位,0,0,0,
+parkrun,公园跑（免费五公里）,0,0,1,题：go to the local ____ with my friends，填 library 或 canteen 也说得通
+a tin of,一个罐头（英式 tin，美式 can）,0,0,1,题：grab ____ beans，a jar of beans 超市里也有，填进去也说得通
+mph,英里每小时（车速）,0,0,0,
+aisle,货架通道,0,0,1,题：on the third ____ of the supermarket，填 shelf 也说得通
+split ticketing,分段买票省钱,0,0,0,
+Lagrange multiplier,拉格朗日乘子,0,0,0,
+
+合计,2026-10-25 全量生成后，从 2344 个里随机抽 20 个（随机种子 20261025）,1,0,7,判定：Claude 判的，建议你自己抽看 3 到 5 条。选择题 7 道有问题：1 道填进去句子不通，6 道别的选项也说得通
+错误率,,1/60 = 1.7%,0/60 = 0.0%,7/20 = 35%,

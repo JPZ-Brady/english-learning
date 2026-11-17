@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>利兹英语学习台 v3</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--ink:#14161a;--dim:#5a6472;--line:#e2e6ec;
+--blue:#1f6feb;--green:#158a4c;--red:#cf3a3a;--amber:#b5771a;--purple:#7145c9}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;font-size:18px;line-height:1.7}
+header{background:#fff;border-bottom:1px solid var(--line);padding:13px 22px;position:sticky;top:0;z-index:30}
+h1{margin:0;font-size:21px}
+h1 small{font-weight:400;color:var(--dim);font-size:13px;margin-left:8px}
+nav{display:flex;gap:6px;margin-top:11px;flex-wrap:wrap}
+nav button{font:inherit;font-size:15px;padding:7px 14px;border:1px solid var(--line);background:#fff;border-radius:9px;cursor:pointer;color:var(--dim)}
+nav button.on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+main{max-width:960px;margin:0 auto;padding:20px 18px 140px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 21px;margin-bottom:15px}
+.card h2{margin:0 0 11px;font-size:19px}
+.card h3{margin:18px 0 7px;font-size:16px;color:var(--dim)}
+.big{font-size:42px;font-weight:700;letter-spacing:-.5px;line-height:1.25;word-break:break-word}
+.ipa{font-size:21px;color:var(--blue);font-family:Consolas,"Segoe UI",monospace;margin-top:4px}
+.zh{font-size:25px;font-weight:600;margin:11px 0 4px}
+.ex{font-size:18px;margin-top:11px;padding:12px 15px;background:#f2f6ff;border-left:4px solid var(--blue);border-radius:0 8px 8px 0}
+.exzh{color:var(--dim);font-size:16px;margin-top:4px}
+.tag{display:inline-block;font-size:13px;padding:3px 11px;border-radius:999px;background:#eef1f5;color:var(--dim);margin-bottom:9px}
+.tag.hard{background:#ffecec;color:#b32020}
+.btn{font:inherit;font-size:17px;padding:11px 18px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;margin:5px 5px 0 0;color:var(--ink)}
+.btn:hover{background:#eef1f6}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+.btn.ok{background:var(--green);border-color:var(--green);color:#fff;font-weight:600}
+.btn.no{background:var(--red);border-color:var(--red);color:#fff;font-weight:600}
+.btn.hard{background:var(--amber);border-color:var(--amber);color:#fff;font-weight:600}
+.btn.easy{background:var(--purple);border-color:var(--purple);color:#fff;font-weight:600}
+.btn.say{background:#eef4ff;border-color:#cfe0ff;color:var(--blue);font-weight:600}
+.bar{height:11px;background:#e6e9ee;border-radius:999px;overflow:hidden;margin:9px 0 5px}
+.bar i{display:block;height:100%;background:var(--green);width:0;transition:width .25s}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--dim);font-size:15px}
+.kpi{display:flex;gap:22px;flex-wrap:wrap;margin-top:6px}
+.kpi div{font-size:27px;font-weight:700}
+.kpi span{display:block;font-size:14px;color:var(--dim);font-weight:400}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:15px}
+select,input[type=number],input[type=text]{font:inherit;font-size:16px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:#fff}
+input[type=text]{width:100%;max-width:460px}
+input[type=number]{width:110px}
+.warn{background:#fff8e6;border-left:4px solid var(--amber);padding:12px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.good{background:#eefaf1;border-left:4px solid var(--green);padding:12px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.info{background:#f2f6ff;border-left:4px solid var(--blue);padding:12px 15px;border-radius:0 8px 8px 0;margin:12px 0}
+.pill{font-size:15px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--dim)}
+.pill.on{background:#14161a;color:#fff;border-color:#14161a}
+#voicebar{font-size:13px;color:var(--dim);margin-top:7px}
+.legend{font-size:15px;color:var(--dim);margin-top:9px;line-height:1.9}
+.kbd{display:inline-block;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 6px;font-size:14px;background:#fafbfc;font-family:Consolas,monospace}
+code{background:#eef1f5;padding:1px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:15px}
+.metric{display:inline-block;background:#eef1f5;border-radius:8px;padding:4px 11px;font-size:14px;color:var(--dim);margin:6px 6px 0 0}
+.metric b{color:var(--ink)}
+@media print{header,nav,.noprint{display:none!important}section{display:block!important}body{background:#fff;font-size:12pt}.card{border:none;padding:0;break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>利兹英语学习台 v3 <small id="deckInfo">词库加载中…</small></h1>
+  <nav id="tabsbar">
+    <button data-t="today" class="on">📅 今日</button>
+    <button data-t="cards">🃏 学习</button>
+    <button data-t="browse">📖 速查</button>
+    <button data-t="stats">📊 统计</button>
+    <button data-t="settings">⚙️ 设置</button>
+    <button data-t="recap">📋 记录</button>
+    <button data-t="science">🧠 原理</button>
+  </nav>
+  <div id="voicebar">发音引擎：检测中…</div>
+</header>
+
+<main>
+
+<section id="today" class="on">
+  <div class="card">
+    <h2>今天的任务</h2>
+    <div class="kpi">
+      <div id="tNew">0<span>新词</span></div>
+      <div id="tDue">0<span>到期复习</span></div>
+      <div id="tDone">0<span>今天已完成</span></div>
+      <div id="tTotal">0<span>词库总量</span></div>
+    </div>
+    <div class="bar"><i id="tBar"></i></div>
+    <p class="muted" id="tMsg"></p>
+    <div style="margin-top:13px">
+      <button class="btn primary" onclick="startToday()">▶ 开始今天的学习</button>
+      <button class="btn" onclick="startKind('review')">只复习</button>
+      <button class="btn" onclick="startKind('new')">只学新词</button>
+    </div>
+    <div style="margin-top:8px">
+      <button class="btn" onclick="openRecapToday()">📋 看今天学了哪些词</button>
+      <button class="btn" onclick="exportAll()">💾 导出备份</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>今天学过的词</h2>
+    <div id="todayRecap"></div>
+  </div>
+
+  <div class="card">
+    <h2>未来 7 天到期预测</h2>
+    <p class="muted">FSRS 按 <b>R(t,S) = (t/S·0.98 + 1)<sup>-0.1542</sup></b> 计算每张卡什么时候会忘，只在快忘的时候让你复习。所以前几周量小、后面变大是正常的。</p>
+    <table id="forecast"></table>
+  </div>
+
+  <div class="card">
+    <h2>怎么用</h2>
+    <div class="good">
+      <b>每天点一次「开始今天的学习」，做完它给你的那一批，就结束。</b>
+      系统自己决定哪些今天该复习、哪些是新词。你不要自己加量。
+    </div>
+    <h3>四个按钮</h3>
+    <table>
+      <tr><th style="width:110px">按钮</th><th>什么时候点</th></tr>
+      <tr><td><b style="color:#cf3a3a">❌ 不会</b></td><td>完全想不起来 / 说不出来。记忆强度会被大幅下调，本轮内还会再出现一次。</td></tr>
+      <tr><td><b style="color:#b5771a">😐 有点难</b></td><td>想起来了，但很费劲、犹豫了好几秒。</td></tr>
+      <tr><td><b style="color:#158a4c">✅ 会了</b></td><td>顺利想起来、能说出口。</td></tr>
+      <tr><td><b style="color:#7145c9">😎 太简单</b></td><td>秒答，根本不用想。间隔会大幅拉长。</td></tr>
+    </table>
+    <div class="legend">
+      快捷键：<span class="kbd">空格</span> 显示答案 · <span class="kbd">1</span> 不会 · <span class="kbd">2</span> 有点难 ·
+      <span class="kbd">3</span> 会了 · <span class="kbd">4</span> 太简单 · <span class="kbd">S</span> 再听一遍 · <span class="kbd">U</span> 撤销上一次评分
+    </div>
+    <div class="warn"><b>白天那一步不能省：</b>今天学的词挑 <b>3 个真实用出去</b>。</div>
+  </div>
+</section>
+
+<section id="cards">
+  <div class="card noprint">
+    <h2>🃏 学习</h2>
+    <div class="row" style="margin-bottom:11px">
+      <button class="btn primary" onclick="startToday()">今日任务</button>
+      <button class="btn" onclick="startKind('review')">只复习到期的</button>
+      <button class="btn" onclick="startKind('new')">只学新词</button>
+      <button class="btn" onclick="startKind('all')">全部过一遍</button>
+    </div>
+    <div class="row">
+      <span class="muted">模式</span>
+      <button class="pill" data-mode="learn" onclick="setMode('learn')">学习(编码)</button>
+      <button class="pill on" data-mode="zh2en" onclick="setMode('zh2en')">中→英(产出)</button>
+      <button class="pill" data-mode="cloze" onclick="setMode('cloze')">填空</button>
+      <button class="pill" data-mode="en2zh" onclick="setMode('en2zh')">英→中(辨认)</button>
+    </div>
+    <div class="row" style="margin-top:9px">
+      <span class="muted">分类</span>
+      <select id="catSel" onchange="startKind(lastKind)"><option value="">全部</option></select>
+    </div>
+  </div>
+  <div class="card" id="cardBox"><p class="muted">点上面的按钮开始。</p></div>
+</section>
+
+<section id="browse">
+  <div class="card noprint">
+    <h2>📖 全部速查</h2>
+    <input type="text" id="kwbox" placeholder="输入中文或英文搜索…" oninput="renderBrowse()">
+    <div class="row" style="margin-top:11px" id="catPills"></div>
+  </div>
+  <div class="card"><div id="browseBox"></div></div>
+</section>
+
+<section id="stats">
+  <div class="card">
+    <h2>📊 总体进度</h2>
+    <div class="kpi">
+      <div id="kTotal">0<span>总词条</span></div>
+      <div id="kLearned">0<span>已学过</span></div>
+      <div id="kKnown">0<span>已稳固(≥21天)</span></div>
+      <div id="kStreak">0<span>连续天数</span></div>
+    </div>
+    <div class="bar"><i id="barKnown"></i></div>
+    <h3>记忆模型现状</h3>
+    <div id="modelStats"></div>
+    <h3>最近 14 天</h3>
+    <table id="histTable"></table>
+    <h3>按分类</h3>
+    <table id="catTable"></table>
+    <h3>词库来源</h3>
+    <table id="partTable"></table>
+  </div>
+</section>
+
+<section id="settings">
+  <div class="card">
+    <h2>🎯 期望记忆保持率（最重要的一个旋钮）</h2>
+    <div class="info">
+      这是 FSRS 的核心参数。设 0.90 表示：<b>每次复习时，你大约有 90% 的概率还想得起来</b>。<br>
+      调高 → 复习更频繁、记得更牢、但每天更累；调低 → 间隔拉长、每天轻松、但忘得更多。<br>
+      <b>0.90 是官方默认值，也是绝大多数人的最优解。</b>觉得太累可以降到 0.85。
+    </div>
+    <table>
+      <tr><td style="width:42%"><b>期望保持率</b><div class="muted">0.75 – 0.97</div></td>
+          <td><input type="number" id="setDr" min="0.75" max="0.97" step="0.01" onchange="saveSet()"> <span class="muted" id="drHint"></span></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ 每日数量</h2>
+    <table>
+      <tr><td style="width:42%"><b>每天学多少新词</b><div class="muted">建议 10-25，刚开始先设 10-15</div></td>
+          <td><input type="number" id="setNew" min="1" max="100" onchange="saveSet()"> 张</td></tr>
+      <tr><td><b>每天复习上限</b><div class="muted">到期太多时一天最多做多少张</div></td>
+          <td><input type="number" id="setRev" min="10" max="999" onchange="saveSet()"> 张</td></tr>
+      <tr><td><b>出题顺序</b></td>
+          <td><select id="setOrder" onchange="saveSet()">
+            <option value="review-first">先复习，后新词</option>
+            <option value="mixed">混合出题（推荐）</option>
+            <option value="new-first">先新词，后复习</option>
+          </select></td></tr>
+    </table>
+    <p class="muted" id="setHint"></p>
+  </div>
+
+  <div class="card">
+    <h2>🧠 记忆科学开关</h2>
+    <table>
+      <tr><td style="width:42%"><b>例句轮换</b><div class="muted">同一个词每次复习换一个例句（编码变异性：换语境能显著提升长期保持和迁移）</div></td>
+          <td><input type="checkbox" id="setRot" onchange="saveSet()" style="width:20px;height:20px"></td></tr>
+      <tr><td><b>交错混合</b><div class="muted">把不同分类的卡打散，不按分类成块刷（交错练习：比分组练习记得牢）</div></td>
+          <td><input type="checkbox" id="setInt" onchange="saveSet()" style="width:20px;height:20px"></td></tr>
+      <tr><td><b>难点卡阈值</b><div class="muted">答错多少次后标记为「难点卡」并提醒你重写这张卡</div></td>
+          <td><input type="number" id="setLeech" min="3" max="20" onchange="saveSet()"> 次</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>⚙️ 显示与发音</h2>
+    <table>
+      <tr><td style="width:42%"><b>复习卡的提示</b><div class="muted">首字母提示（如 c_______ b__）什么时候给。给得越足，当次越顺，但长期记得越浅</div></td>
+          <td><select id="setHintMode" onchange="saveSet()">
+            <option value="button">想不起来点「💡 提示」（推荐）</option>
+            <option value="always">总是直接显示</option>
+            <option value="off">完全不给</option>
+          </select></td></tr>
+      <tr><td style="width:42%">显示音标</td><td><input type="checkbox" id="setIpa" onchange="saveSet()" style="width:20px;height:20px"></td></tr>
+      <tr><td>自动朗读（新卡出现时自动发音）</td><td><input type="checkbox" id="setAuto" onchange="saveSet()" style="width:20px;height:20px"></td></tr>
+      <tr><td>发音语速</td><td><input type="number" id="setRate" min="0.5" max="1.2" step="0.05" onchange="saveSet()"> <span class="muted">0.6-1.0</span></td></tr>
+      <tr><td>用哪个语音</td><td><select id="setVoice" onchange="onVoicePick()"><option value="">自动（英音优先）</option></select></td></tr>
+      <tr><td>发音出问题时</td><td>
+        <button class="btn" onclick="testVoice()">🔊 试听</button>
+        <button class="btn" onclick="voiceDiag()">🔍 发音诊断</button>
+      </td></tr>
+    </table>
+    <div id="voiceTestList" style="margin-top:10px"></div>
+    <pre id="voiceDiagBox" style="display:none;white-space:pre-wrap;font-size:13px;line-height:1.6;background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:12px;max-height:360px;overflow:auto"></pre>
+  </div>
+
+  <div class="card">
+    <h2>💾 数据</h2>
+    <div class="info"><b>存档只存在浏览器本机。</b>换浏览器、清理缓存、或系统清理工具，都会丢。<br>
+    <b>建议每周点一次「导出全部数据」存成文件。</b></div>
+    <button class="btn" onclick="storageReport()">🔍 存档状态</button>
+    <button class="btn" onclick="backupNow()">📌 立即存一份本机备份</button>
+    <button class="btn" onclick="restoreBackup()">↩ 从本机备份恢复</button>
+    <button class="btn primary" onclick="exportAll()">💾 导出全部数据（备份）</button>
+    <button class="btn" onclick="window.print()">🖨 打印当前页</button>
+    <button class="btn no" onclick="resetAll()">清空全部进度</button>
+    <p class="muted" style="margin-top:10px">进度存在本机浏览器里，换浏览器或清缓存会丢。重要节点记得导出备份。</p>
+  </div>
+</section>
+
+<section id="recap">
+  <div class="card noprint">
+    <h2>📋 学习记录</h2>
+    <div class="row">
+      <button class="btn" onclick="shiftRecap(-1)">← 前一天</button>
+      <b id="recapDate" style="font-size:19px"></b>
+      <button class="btn" onclick="shiftRecap(1)">后一天 →</button>
+      <button class="btn" onclick="shiftRecap(0)">回到今天</button>
+    </div>
+    <p class="muted" id="recapHint"></p>
+  </div>
+  <div class="card" id="recapBox"></div>
+</section>
+
+<section id="science">
+  <div class="card">
+    <h2>🧠 这套东西背后的记忆科学</h2>
+    <div class="info">
+      下面每一条都是<b>有实证支持的</b>，而且我已经把它做进了程序里。不是装饰。
+    </div>
+
+    <h3>1. 调度算法：FSRS-6（不是 SM-2）</h3>
+    <p>旧的 SM-2 是 1987 年的算法，只用一个「难度系数」推间隔。FSRS 是 2022 年后基于<b>上亿条真实复习记录</b>拟合出来的，Anki 现在的默认算法。</p>
+    <p>它给每张卡维护两个量：</p>
+    <ul>
+      <li><b>S（记忆稳定性）</b>：以天为单位，表示「过多久你的回忆概率会掉到 90%」</li>
+      <li><b>D（难度）</b>：1-10，这张卡对你有多难</li>
+    </ul>
+    <p>然后按幂函数遗忘曲线算你现在的回忆概率：</p>
+    <p><code>R(t, S) = (t / S × 0.98 + 1) ^ (-0.1542)</code></p>
+    <p>下一次复习时间 = 让 R 掉到「期望保持率」的那一天。参数逐行取自官方实现 <code>open-spaced-repetition/fsrs-rs</code>，没有自己改。</p>
+
+    <h3>2. 提取练习（Testing Effect）</h3>
+    <p><b>主动回忆比重复阅读有效得多。</b>所以默认模式是「中→英」——逼你自己把英文说出来，而不是看着英文认中文。看答案之前先挣扎，挣扎本身就是记忆形成的过程。</p>
+
+    <h3>3. 编码变异性（Encoding Variability）</h3>
+    <p>同一个词在<b>不同例句、不同语境</b>里反复出现，比每次都在同一句话里见到，长期保持和迁移都更好。程序每次复习会轮换例句。</p>
+
+    <h3>4. 交错练习（Interleaving）</h3>
+    <p>把不同类别的卡打散着刷，比一类刷完再刷下一类记得牢，因为它训练的是「分辨该用哪个」，而不只是「重复这一个」。</p>
+
+    <h3>5. 合意困难（Desirable Difficulty）</h3>
+    <p>学得越顺，忘得越快。所以：<b>不要因为「今天做得很轻松」就加量</b>，也不要因为「有点吃力」就降难度。吃力是正常的，这正是记忆在形成。</p>
+
+    <h3>6. 间隔效应（Spacing Effect）</h3>
+    <p>同样复习 5 次，分散到 5 天比集中在一天好得多。所以程序硬性规定：新词第一次复习必须隔天，且同一天不会安排超过一轮。</p>
+
+    <h3>7. 难点卡识别（Leech Detection）</h3>
+    <p>一张卡答错太多次，说明<b>这张卡本身有问题</b>（词太生僻、例句没帮你建立联系、或者你根本没理解）。程序会标出来提醒你重写，而不是让你无限重复。</p>
+
+    <h3>8. 双编码（Dual Coding）</h3>
+    <p>每个词都配<b>声音 + 文字 + 音标</b>。多通道输入比只看文字记得牢，对口语尤其重要。</p>
+
+    <h3>9. 睡眠巩固</h3>
+    <p>记忆是在睡眠中固化的。所以别熬夜刷词卡——<b>睡前刷一遍，第二天早上复习的效果明显更好。</b></p>
+
+    <h3>10. 合意困难与提示的取舍</h3>
+    <p>首字母提示（<code>c_______ b__</code>）让回忆变容易，但<b>回忆的费力程度本身就是记忆形成的主要驱动力</b>。
+    给得越足，当次越顺，长期记得越浅 —— 而且真实对话里没人给你首字母。</p>
+    <p>所以默认是<b>「想不起来点一下」</b>：能自己想出来就别点，卡住了有台阶下。设置里可改成「总是显示」或「完全不给」。</p>
+
+    <h3>11. 编码先于提取（Encoding before Retrieval）</h3>
+    <p><b>你没法提取一个从没进过脑子的东西。</b>所以新卡是两段式的：<br>
+    <b>第 1 步 编码</b> —— 看英文、听发音、读中文、把例句过一遍，让它先进脑子；<br>
+    <b>第 2 步 引导提取</b> —— 给首字母提示（<code>g__ o_ w___ s_</code>），你先试着说出来，再揭晓评分。</p>
+    <p>那为什么不干脆上来就考？因为「先猜再看答案」（预测试效应）虽然有时有效，但前提是<b>你能做出像样的猜测</b>。对一个完全陌生的二语词，猜出来的东西没有任何可挂钩的信息，只会变成纯粹的挫败。裸考（中→英）留给复习卡。</p>
+
+    <div class="warn">
+      <b>最后一句实话：</b>算法能优化的是「什么时候复习」。它不能替你做的，是「开口说出去」。<br>
+      所以每天那 3 次真实开口，仍然是这套东西里唯一不可替代的部分。
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="fsrs.js"></script>
+<script src="deck-parts/00-base.js"></script>
+<script src="deck-parts/01-phrasal-verbs.js"></script>
+<script src="deck-parts/02-feelings-uk.js"></script>
+<script src="deck-parts/03-food-shopping.js"></script>
+<script src="deck-parts/04-housing-bills.js"></script>
+<script src="deck-parts/05-health-nhs.js"></script>
+<script src="deck-parts/06-money-admin.js"></script>
+<script src="deck-parts/07-work-career.js"></script>
+<script src="deck-parts/08-academic-writing.js"></script>
+<script src="deck-parts/09-class-study.js"></script>
+<script src="deck-parts/10-social.js"></script>
+<script src="deck-parts/11-ai-ml-advanced.js"></script>
+<script src="deck-parts/12-programming.js"></script>
+<script src="deck-parts/13-maths-stats.js"></script>
+<script src="deck-parts/15-base-expand-a.js"></script>
+<script src="deck-parts/15-base-expand-b.js"></script>
+<script src="deck-parts/15-base-expand-c.js"></script>
+<script src="deck-parts/16-home-objects.js"></script>
+<script src="deck-parts/17-describe-people.js"></script>
+<script src="deck-parts/18-weather-nature.js"></script>
+<script src="deck-parts/19-complaints-service.js"></script>
+<script src="deck-parts/20-travel-hotel.js"></script>
+<script src="deck-parts/21-news-society.js"></script>
+<script src="deck-parts/22-sport-body.js"></script>
+<script src="deck-parts/23-uk-culture.js"></script>
+<script src="deck-parts/24-numbers-measures.js"></script>
+<script src="deck-parts/25-research-practice.js"></script>
+<!-- 课堂笔记自动生成的词库分片（重新生成：课堂笔记\sync-fsrs.js） -->
+<script src="notes-cards.js"></script>
+<script src="audio/index.js"></script><!-- 本地发音索引，由 生成发音.ps1 生成；没有这个文件也能正常用 -->
+<script src="ai-examples.js"></script><!-- AI 例句和小测验，由 gen_examples.py 生成；没有这个文件也能正常用 -->
+
+<script>
+/* ============================================================
+   存储
+   ============================================================ */
+var STORE = 'leeds_en_v3';
+var DEFAULTS = {
+  newPerDay:15, maxReview:120, order:'mixed', dr:0.90,
+  rotateEx:true, interleave:true, leechAt:8,
+  mode:'zh2en', showIpa:true, autoplay:true, rate:0.9,
+  hintMode:'button',  /* button=点按钮才给 | always=直接显示 | off=不给 */
+  voiceURI:''         /* 手动指定的语音；空=自动（英音优先） */
+};
+var LOAD_STATE = 'ok';   /* ok | empty | unreadable */
+var RAW_LEN = 0;
+var BAK_KEY = STORE + '_bak';
+var BAK_TIME = STORE + '_bakt';
+function blankDB(){ return { set: Object.assign({}, DEFAULTS), cards:{}, log:{} }; }
+function loadDB(){
+  var raw = null;
+  try { raw = localStorage.getItem(STORE); } catch(e){ raw = null; }
+  if(raw === null || raw === undefined){ LOAD_STATE = 'empty'; RAW_LEN = 0; return blankDB(); }
+  RAW_LEN = raw.length;
+  var o = null;
+  try { o = JSON.parse(raw); } catch(e){ o = null; }
+  if(o && o.cards && o.set){ LOAD_STATE = 'ok'; return o; }
+  /* 有存档但读不出来：先当空显示，但标记 unreadable，之后绝不写入 */
+  LOAD_STATE = 'unreadable';
+  return blankDB();
+}
+var DB = loadDB();
+DB.set = Object.assign({}, DEFAULTS, DB.set);
+/* 每小时最多留一份快照，避免一次坏写把全部进度带走 */
+function backupDB(force){
+  try {
+    /* 先确认有东西可备份 —— 没备份成功就绝不打时间戳，否则会白白锁住一小时 */
+    var cur = localStorage.getItem(STORE);
+    if(!cur || cur.length < 20) return false;
+    if(!force){
+      var last = parseInt(localStorage.getItem(BAK_TIME) || '0', 10) || 0;
+      if(Date.now() - last < 3600000) return false;
+    }
+    localStorage.setItem(BAK_KEY, cur);
+    localStorage.setItem(BAK_TIME, String(Date.now()));
+    return true;
+  } catch(e){ return false; }
+}
+function backupNow(){
+  var okNow = backupDB(true);
+  toast(okNow ? '已保存一份本机备份' : '还没有可备份的进度');
+  if(okNow) fillSettings();
+}
+function saveDB(){
+  if(LOAD_STATE === 'unreadable'){ toast('存档读取失败，已暂停写入以保护旧数据'); return false; }
+  try {
+    backupDB();
+    var s = JSON.stringify(DB);
+    localStorage.setItem(STORE, s);
+    RAW_LEN = s.length;
+    return true;
+  } catch(e){ toast('保存失败：浏览器存储不可用或已满'); return false; }
+}
+function restoreBackup(){
+  try {
+    var b = localStorage.getItem(BAK_KEY);
+    if(!b){ toast('本机还没有可用备份'); return; }
+    if(!confirm('用备份覆盖当前进度？当前进度会丢失。')) return;
+    localStorage.setItem(STORE, b);
+    toast('已从备份恢复，正在重新加载…');
+    setTimeout(function(){ location.reload(); }, 900);
+  } catch(e){ toast('恢复失败：' + (e && e.message ? e.message : e)); }
+}
+function storageReport(){
+  var rows = [], bt = 0;
+  try {
+    Object.keys(localStorage).sort().forEach(function(k){
+      if(k.indexOf('leeds') !== 0) return;
+      rows.push('  ' + k + ' -> ' + (localStorage.getItem(k) || '').length + ' 字符');
+    });
+    bt = parseInt(localStorage.getItem(BAK_TIME) || '0', 10) || 0;
+  } catch(e){}
+  var st = { ok:'正常', empty:'本机没有存档（首次使用，或换了浏览器）', unreadable:'存在但无法解析' }[LOAD_STATE] || LOAD_STATE;
+  alert('当前存档状态\n\n' +
+    '\u00b7 存档键：' + STORE + '\n' +
+    '\u00b7 读取状态：' + st + '\n' +
+    '\u00b7 存档大小：' + Math.round(RAW_LEN / 1024) + ' KB\n' +
+    '\u00b7 已记录卡片：' + Object.keys(DB.cards || {}).length + ' 张\n' +
+    '\u00b7 记录天数：' + Object.keys(DB.log || {}).length + ' 天\n' +
+    '\u00b7 上次备份：' + (bt ? new Date(bt).toLocaleString() : '从未') + '\n\n' +
+    '本机所有 leeds* 键：\n' + (rows.length ? rows.join('\n') : '  （一个都没有）'));
+}
+
+/* ---------- 日期 ---------- */
+function todayStr(d){ d = d || new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function addDays(s,n){ var p = String(s).split('-').map(Number); return todayStr(new Date(p[0], p[1]-1, p[2]+n)); }
+function diffDays(a,b){ var p=String(a).split('-').map(Number), r=String(b).split('-').map(Number);
+  return Math.round((new Date(r[0],r[1]-1,r[2]) - new Date(p[0],p[1]-1,p[2])) / 86400000); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>]/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;'})[c]; }); }
+function jsq(s){ return JSON.stringify(String(s==null?'':s)).replace(/"/g,'&quot;'); }
+
+/* ============================================================
+   词库
+   ============================================================ */
+var ENTRIES = [];
+/* 这段为什么单独标记：_test-bridge.js 与 _check-all.js 会把标记之间的代码直接抽出来在 node 里跑，
+   这样去重规则只有**一个定义**，不会出现「改一处、忘两处、数字看着对其实错」。
+   （2026-09-29 之前就是三份复制品，实测过一次口径不一致。） */
+/* ===== 词库去重规则（唯一定义）开始 ===== */
+function exCount(d){ return Array.isArray(d.ex) ? d.ex.length : (d.ex ? 1 : 0); }
+function exList(d){ return Array.isArray(d.ex) ? d.ex : (d.ex ? [d.ex] : []); }
+/* 分类名规范化：
+   - 去掉旧分片的 ①②③ 前缀
+   - 课堂笔记的分类名截断成「课堂笔记 · DEMO1013M」这种短标签（生成端把名字截到 22 字）*/
+function tidyCat(c){
+  var s = String(c == null ? '' : c).replace(/^[\u2460-\u2473]\s*/, '');
+  var m = s.match(/^(课堂笔记(?:问答)?)\s*[·・]\s*(.+)$/);
+  if(!m) return s;
+  var head = m[1], rest = m[2];
+  /* 1) 有课程代码就用代码（用户要的「课堂笔记 · DEMO1013M」）*/
+  var code = rest.match(/^([A-Z]{2,8}\d{3,4}[A-Z]?)/);
+  if(code) return head + ' · ' + code[1];
+  /* 2) 没有代码时取最后一段（最具体的那个），例如「迎新周 · 个人导师见面会」→「个人导师见面会」*/
+  var segs = rest.split(/\s*[·・]\s*/).filter(function(x){ return x; });
+  return head + ' · ' + (segs.length ? segs[segs.length - 1] : rest);
+}
+function isNoteCard(d){ return String(d.c == null ? '' : d.c).indexOf('课堂笔记') === 0; }
+function exKey(x){ return String(x && x.e != null ? x.e : x); }
+/* 课堂笔记卡胜出时，把基础卡里的例句并进来（最多 3 句，按原句去重）：
+   不并的话，16 张课内术语（validity / resit / collusion / inference …）会输给基础词库的同名卡
+   —— 学生看到的是通用释义，课内那层含义和课堂原句就看不到了（2026-09-29 实测发现）。*/
+function mergeNoteEx(note, base){
+  var out = exList(note).slice();
+  exList(base).forEach(function(x){
+    if(out.length >= 3) return;
+    var k = exKey(x);
+    for(var i = 0; i < out.length; i++) if(exKey(out[i]) === k) return;
+    out.push(x);
+  });
+  if(!out.length) return note;
+  return Object.assign({}, note, { ex: out });
+}
+function allEntries(){
+  var parts = window.DECK_PARTS || {}, seen = new Map();
+  Object.keys(parts).sort().forEach(function(k){
+    (parts[k]||[]).forEach(function(d){
+      if(!d || !d.en) return;
+      var key = String(d.en).trim(), prev = seen.get(key);
+      d = Object.assign({}, d, { c: tidyCat(d.c) });
+      if(!prev){ seen.set(key, d); return; }
+      var dNote = isNoteCard(d), pNote = isNoteCard(prev);
+      if(dNote && !pNote){ seen.set(key, mergeNoteEx(d, prev)); return; }   /* 课堂笔记卡优先 */
+      if(pNote && !dNote){ seen.set(key, mergeNoteEx(prev, d)); return; }   /* 基础卡不许顶掉课堂卡 */
+      if(exCount(d) > exCount(prev)) seen.set(key, d);                     /* 同类之间比例句数 */
+    });
+  });
+  return Array.from(seen.values());
+}
+/* ===== 词库去重规则（唯一定义）结束 ===== */
+var BY_EN = {};
+function reloadDeck(){ ENTRIES = allEntries(); BY_EN = {}; ENTRIES.forEach(function(d){ BY_EN[d.en] = d; }); }
+function newCard(){ return { s:0, d:0, last:'', st:0, due:'', lapses:0, reps:0, exIdx:0 }; }
+function C(en){ if(!DB.cards[en]) DB.cards[en] = newCard(); return DB.cards[en]; }
+
+/* ============================================================
+   复习：一次评分 → 更新 FSRS 状态 + 排下一次
+   ============================================================ */
+function review(en, g){
+  var c = C(en), T = todayStr();
+  var wasNew = (c.st === 0);
+  var S, D;
+  if(wasNew){
+    S = initStability(g);
+    D = clamp(initDifficulty(g), D_MIN, D_MAX);   /* 官方公式 g=4 时算出负数，使用前必须 clamp */
+  } else {
+    var elapsed = c.last ? Math.max(0, diffDays(c.last, T)) : 0;
+    var nx = fsrsNext(c.s || 1, c.d || 5, elapsed, g);
+    S = nx.S; D = nx.D;
+  }
+  c.s = S; c.d = D; c.last = T;
+  c.reps = (c.reps||0) + 1;
+  if(DB.set.rotateEx) c.exIdx = (c.exIdx||0) + 1;
+
+  if(g === 1){
+    c.lapses = (c.lapses||0) + 1;
+    c.st = 1;
+    c.due = T;                                  /* 本轮内再出现一次 */
+  } else if(wasNew){
+    c.st = 1;
+    c.due = addDays(T, 1);                       /* 学习步：隔天 */
+  } else {
+    c.st = 2;
+    c.due = addDays(T, clamp(Math.round(intervalFor(S, DB.set.dr)), 1, 365));
+  }
+  return { wasNew: wasNew };
+}
+
+/* ============================================================
+   队列
+   ============================================================ */
+function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+function pickPool(){
+  var el = document.getElementById('catSel');
+  var cat = el ? el.value : '';
+  return cat ? ENTRIES.filter(function(d){ return d.c === cat; }) : ENTRIES.slice();
+}
+function splitPool(pool, T){
+  var due = [], fresh = [];
+  pool.forEach(function(d){
+    var c = DB.cards[d.en];
+    if(!c || !c.st) fresh.push(d);
+    else if(c.st > 0 && c.due && c.due <= T) due.push(d);
+  });
+  due.sort(function(a,b){
+    var x = DB.cards[a.en], y = DB.cards[b.en];
+    if(x.due !== y.due) return x.due < y.due ? -1 : 1;
+    return (y.lapses||0) - (x.lapses||0);
+  });
+  return { due: due, fresh: fresh };
+}
+function newQuota(T){ return Math.max(0, DB.set.newPerDay - ((DB.log[T] && DB.log[T].n) || 0)); }
+function interleave(a,b){
+  var out = [], i = 0, j = 0;
+  while(i < a.length || j < b.length){
+    for(var k=0;k<2 && i<a.length;k++) out.push(a[i++]);
+    if(j < b.length) out.push(b[j++]);
+  }
+  return out;
+}
+function buildQueue(kind){
+  var T = todayStr(), sp = splitPool(pickPool(), T);
+  var dq = sp.due.slice(0, DB.set.maxReview);
+  if(DB.set.interleave) dq = shuffle(dq);        /* 交错练习 */
+  var nq = sp.fresh.slice(0, newQuota(T));
+  if(kind === 'review') return dq;
+  if(kind === 'new')    return sp.fresh.slice(0, newQuota(T) || DB.set.newPerDay);
+  if(kind === 'all')    return sp.due.concat(sp.fresh);
+  if(DB.set.order === 'review-first') return dq.concat(nq);
+  if(DB.set.order === 'new-first')    return nq.concat(dq);
+  return interleave(nq, dq);
+}
+
+/* ============================================================
+   填空模式
+   ============================================================ */
+function makeCloze(exEn, target){
+  var t = String(target).replace(/\s+(sb|sth)$/,'').trim();
+  var cands = [t, t.split(/\s+/)[0]];
+  for(var i=0;i<cands.length;i++){
+    var cand = cands[i];
+    if(!cand || cand.length < 3) continue;
+    var safe = cand.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var m = exEn.match(new RegExp('\\b' + safe + '\\w*', 'i'));
+    if(m) return { q: exEn.slice(0,m.index) + '_____' + exEn.slice(m.index + m[0].length), a: m[0] };
+  }
+  return null;
+}
+function curExample(d){
+  var list = exList(d);
+  if(!list.length) return null;
+  var c = DB.cards[d.en];
+  var idx = (c && c.exIdx) ? (c.exIdx % list.length) : 0;
+  var x = list[idx];
+  return (typeof x === 'string') ? { e:x, z:'' } : { e:x.e||'', z:x.z||'' };
+}
+
+/* ============================================================
+   会话
+   ============================================================ */
+var Q = [], qi = 0, mode = 'zh2en', revealed = false, lastKind = 'today', encDone = false;
+var hintOn = false;   /* 本张卡用户是否已点过「提示」 */
+var SS = { ok:0, hard:0, no:0, easy:0 };
+
+function setMode(m){
+  mode = m; revealed = false;
+  document.querySelectorAll('.pill[data-mode]').forEach(function(b){ b.classList.toggle('on', b.dataset.mode === m); });
+  if(Q.length) renderCard();
+}
+function startToday(){ startKind('today'); }
+function startKind(kind){
+  lastKind = kind;
+  Q = buildQueue(kind); qi = 0; revealed = false; encDone = false; hintOn = false; sessId++;
+  SS = { ok:0, hard:0, no:0, easy:0 };
+  goTab('cards'); renderCard();
+}
+function hintShown(isNew){
+  if(DB.set.hintMode === 'off') return false;
+  if(DB.set.hintMode === 'always') return true;
+  return !!isNew || hintOn;   /* button 模式：新卡直接给脚手架，复习卡点一下才给 */
+}
+function hintBtn(){
+  return DB.set.hintMode === 'button'
+    ? ' <button class="btn" style="padding:4px 12px;font-size:15px;margin-left:6px" onclick="showHint()">💡 提示</button>'
+    : '';
+}
+function showHint(){ hintOn = true; renderCard(); }
+function modeLabel(){ return mode==='learn' ? '学习':(mode==='zh2en' ? '中→英':(mode==='cloze' ? '填空':'英→中')); }
+/* 首字母提示：get on with sb -> g__ o_ w___ s_ */
+function hintOf(en){
+  return String(en).split(/\s+/).map(function(w){
+    return w.length <= 1 ? w : w[0] + new Array(w.length).join('_');
+  }).join('   ');
+}
+
+function renderCard(){
+  var box = document.getElementById('cardBox');
+  if(!Q.length){
+    box.innerHTML = '<p class="muted">这个范围里暂时没有要学的卡。</p><button class="btn primary" onclick="startToday()">看今日任务</button>';
+    return;
+  }
+  if(qi >= Q.length){
+    box.innerHTML = '<h2>这一轮做完了 🎉</h2>' +
+      '<p class="muted">会了 ' + SS.ok + ' ｜ 有点难 ' + SS.hard + ' ｜ 不会 ' + SS.no + ' ｜ 太简单 ' + SS.easy + '</p>' +
+      '<div class="good"><b>未来 7 天还有 ' + nextDueSoon(7) + ' 张到期。</b>今天到此为止，不要加量。</div>' +
+      '<div class="warn"><b>别忘了白天那一步：</b>今天学的词挑 3 个真实用出去。</div>' +
+      '<button class="btn primary" onclick="startToday()">再看今日任务</button>' +
+      '<button class="btn" onclick="startKind(\'review\')">还想多学（只复习）</button>';
+    return;
+  }
+  var d = Q[qi], c = DB.cards[d.en];
+  var isNew = !c || !c.st;
+  var lapses = c ? (c.lapses||0) : 0;
+  var isLeech = lapses >= (DB.set.leechAt||8);
+  var pct = Math.round((qi+1)/Q.length*100);
+  var ex = curExample(d);
+
+  /* ---- 课堂笔记问答卡（t:'qa'）：问 → 答，不走单词卡的拼读/编码流程 ---- */
+  if(d.t === 'qa'){
+    var qm = '';
+    if(c && c.st){
+      var qR = retrievability(c.last ? Math.max(0,diffDays(c.last, todayStr())) : 0, c.s);
+      qm = '<div style="margin-top:12px">' +
+        '<span class="metric">记忆稳定性 <b>' + (c.s).toFixed(1) + ' 天</b></span>' +
+        '<span class="metric">当前可回忆度 <b>' + Math.round(qR*100) + '%</b></span>' +
+        '<span class="metric">难度 <b>' + (c.d).toFixed(1) + '</b></span>' +
+        '<span class="metric">下次 <b>' + c.due + '</b></span></div>';
+    }
+    box.innerHTML =
+      '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+      '<p class="muted">' + (qi+1) + ' / ' + Q.length + '</p>' +
+      '<div class="tag' + (isLeech ? ' hard' : '') + '">📝 ' + esc(d.c) + ' ｜ ' +
+        (isNew ? '🆕 新卡' : (c.st===1 ? '📖 学习中' : '🔁 复习')) +
+        (lapses ? ' ｜ 错过 ' + lapses + ' 次' : '') + (isLeech ? ' ｜ ⚠️ 难点卡' : '') + '</div>' +
+      '<div class="big" style="font-size:22px;line-height:1.55">' + esc(d.q || d.en) + '</div>' +
+      (revealed
+        ? '<div class="info" style="margin-top:14px;font-size:19px;line-height:1.65"><b>' + esc(d.a || '') + '</b></div>'
+        : '<p class="muted" style="margin-top:12px">先出声回答一遍，再点「显示答案」。</p>') +
+      qm +
+      '<div style="margin-top:19px">' +
+        (revealed ? '' : '<button class="btn primary" onclick="reveal()">显示答案</button>') +
+        '<button class="btn no" onclick="grade(1)">❌ 不会</button>' +
+        '<button class="btn hard" onclick="grade(2)">😐 有点难</button>' +
+        '<button class="btn ok" onclick="grade(3)">✅ 会了</button>' +
+        '<button class="btn easy" onclick="grade(4)">😎 太简单</button>' +
+      '</div>';
+    return;
+  }
+
+  var head = '<div class="tag' + (isLeech ? ' hard' : '') + '">' + esc(d.c) + ' ｜ ' +
+    (isNew ? '🆕 新卡' : (c.st===1 ? '📖 学习中' : '🔁 复习')) +
+    (lapses ? ' ｜ 错过 ' + lapses + ' 次' : '') + (isLeech ? ' ｜ ⚠️ 难点卡' : '') +
+    ' ｜ ' + modeLabel() + '</div>';
+
+  var showIpa = (DB.set.showIpa && d.ipa) ? '<div class="ipa">' + esc(d.ipa) + '</div>' : '';
+  /* 新卡：先编码，再引导提取。没见过的词不能直接考产出。 */
+  if(isNew && mode !== 'learn' && !encDone){
+    var allEx = exList(d).map(function(x){
+      var e = typeof x === 'string' ? x : (x.e||''), z = typeof x === 'string' ? '' : (x.z||'');
+      if(!e) return '';
+      return '<div class="ex"><b>' + esc(e) + '</b>' + (z ? '<div class="exzh">' + esc(z) + '</div>' : '') +
+        '<div style="margin-top:6px"><button class="btn say" style="padding:6px 12px;font-size:15px" onclick="say(' + jsq(e) + ',false)">🔊 读这句</button></div></div>';
+    }).join('');
+    box.innerHTML =
+      '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+      '<p class="muted">' + (qi+1) + ' / ' + Q.length + '　｜　<b>第 1 步：先认识它</b></p>' +
+      '<div class="tag">' + esc(d.c) + ' ｜ 新卡 ｜ 编码</div>' +
+      '<div class="big">' + esc(d.en) + '</div>' + showIpa +
+      '<div class="zh">' + esc(d.zh) + '</div>' +
+      '<div style="margin-top:12px">' +
+        '<button class="btn say" onclick="say(' + jsq(d.en) + ',false)">🔊 正常</button>' +
+        '<button class="btn say" onclick="say(' + jsq(d.en) + ',true)">🔊 慢速</button>' +
+      '</div>' + allEx +
+      '<div class="info" style="margin-top:14px"><b>先别急着记。</b>听两遍、跟读三遍、把例句念一遍，让它先进脑子。看完再点下面开始自测。</div>' +
+      '<div style="margin-top:18px"><button class="btn primary" onclick="startTest()">我记住了，开始自测 →</button>' +
+      '<button class="btn" onclick="grade(1)">❌ 完全不认识，跳过</button></div>';
+    if(DB.set.autoplay) say(d.en, false);
+    return;
+  }
+  var useMode = mode;
+  var cloze = null;
+  if(mode === 'cloze'){ cloze = ex ? makeCloze(ex.e, d.en) : null; if(!cloze) useMode = 'zh2en'; }
+  if(mode === 'learn') revealed = true;
+
+  if(useMode === 'zh2en'){
+    head += '<div class="big" style="font-size:34px">' + esc(d.zh) + '</div>';
+    head += revealed
+      ? '<div class="big" style="margin-top:15px">' + esc(d.en) + '</div>' + showIpa
+      : (hintShown(isNew)
+          ? '<div class="info" style="margin-top:12px"><b>' + (isNew ? '第 2 步：说出来。想不起来就看提示：' : '提示（首字母）：') + '</b><br><b style="font-size:21px;letter-spacing:2px">' + esc(hintOf(d.en)) + '</b></div>'
+          : '<p class="muted" style="margin-top:13px">先<b>说出声</b>，再点「显示答案」。' + hintBtn() + '</p>');
+  } else if(useMode === 'cloze'){
+    head += '<div class="big" style="font-size:27px;line-height:1.5">' + esc(cloze.q) + '</div>';
+    head += '<p class="muted" style="margin-top:10px">空缺的词是：<b>' + esc(d.zh) + '</b></p>';
+    head += revealed
+      ? '<div class="big" style="margin-top:14px;font-size:30px">' + esc(cloze.a) + '</div>' + showIpa
+      : (hintShown(false)
+          ? '<div class="info" style="margin-top:8px"><b>提示（首字母）：</b><br><b style="font-size:21px;letter-spacing:2px">' + esc(hintOf(cloze.a)) + '</b></div>'
+          : '<p class="muted" style="margin-top:8px">把空缺的词<b>说出声</b>。' + hintBtn() + '</p>');
+  } else if(useMode === 'en2zh'){
+    head += '<div class="big">' + esc(d.en) + '</div>' + showIpa;
+    head += revealed
+      ? '<div class="zh">' + esc(d.zh) + '</div>'
+      : '<p class="muted" style="margin-top:12px">先想中文意思。</p>';
+  } else {
+    head += '<div class="big">' + esc(d.en) + '</div>' + showIpa + '<div class="zh">' + esc(d.zh) + '</div>';
+  }
+
+  var sayOk = !((useMode === 'zh2en' || useMode === 'cloze') && !revealed);
+  var sayBtns = sayOk
+    ? '<button class="btn say" onclick="say(' + jsq(d.en) + ',false)">🔊 正常</button>' +
+      '<button class="btn say" onclick="say(' + jsq(d.en) + ',true)">🔊 慢速</button>'
+    : '';
+
+  var body = '';
+  if(revealed && ex && ex.e && useMode !== 'cloze'){
+    body += '<div class="ex"><b>' + esc(ex.e) + '</b>' + (ex.z ? '<div class="exzh">' + esc(ex.z) + '</div>' : '') +
+            '<div style="margin-top:6px"><button class="btn say" style="padding:6px 12px;font-size:15px" onclick="say(' + jsq(ex.e) + ',false)">🔊 读这句</button></div></div>';
+  }
+  if(revealed && useMode === 'cloze' && ex){
+    body += '<div class="ex">' + esc(ex.e) + (ex.z ? '<div class="exzh">' + esc(ex.z) + '</div>' : '') + '</div>';
+  }
+  if(revealed) body += aiBlock(d.en);  // 翻到答案那面时，在卡片内容后面接上这个词的 AI 例句和题
+
+  var metrics = '';
+  if(c && c.st){
+    var R = retrievability(c.last ? Math.max(0,diffDays(c.last, todayStr())) : 0, c.s);
+    metrics = '<div style="margin-top:12px">' +
+      '<span class="metric">记忆稳定性 <b>' + (c.s).toFixed(1) + ' 天</b></span>' +
+      '<span class="metric">当前可回忆度 <b>' + Math.round(R*100) + '%</b></span>' +
+      '<span class="metric">难度 <b>' + (c.d).toFixed(1) + '</b></span>' +
+      '<span class="metric">下次 <b>' + c.due + '</b></span></div>';
+  }
+  if(isLeech){
+    body += '<div class="warn" style="margin-top:12px">⚠️ <b>这张卡已经答错 ' + lapses + ' 次</b>，说明卡本身有问题。建议把它删掉，或换成一个你自己有感觉的句子重新记。</div>';
+  }
+
+  box.innerHTML =
+    '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+    '<p class="muted">' + (qi+1) + ' / ' + Q.length + '</p>' +
+    head +
+    '<div style="margin-top:13px">' + sayBtns + '</div>' +
+    body + metrics +
+    '<div style="margin-top:19px">' +
+      (revealed ? '' : '<button class="btn primary" onclick="reveal()">显示答案</button>') +
+      '<button class="btn no" onclick="grade(1)">❌ 不会</button>' +
+      '<button class="btn hard" onclick="grade(2)">😐 有点难</button>' +
+      '<button class="btn ok" onclick="grade(3)">✅ 会了</button>' +
+      '<button class="btn easy" onclick="grade(4)">😎 太简单</button>' +
+      '<button class="btn" onclick="undoLast()" title="撤销上一次评分（快捷键 U）">↩ 撤销</button>' +
+    '</div>';
+
+  if(mode === 'learn' && DB.set.autoplay) say(d.en, false);
+}
+function reveal(){ revealed = true; renderCard(); }
+/* AI 例句和小测验：数据来自 ai-examples.js（window.AI_EXAMPLES），这个词没有就什么都不显示 */
+function aiBlock(word){
+  var a = window.AI_EXAMPLES && window.AI_EXAMPLES[word];  // 没加载 AI 数据时 window.AI_EXAMPLES 不存在，&& 让它不报错
+  if(!a) return '';  // 这个词没有 AI 内容：返回空字符串，卡片和原来一样
+  var h = '<div class="info" style="margin-top:14px"><b>🤖 AI 例句</b>';  // h 用来一段段拼出这块的 HTML
+  a.examples.forEach(function(x){  // 每个例句拼一段：英文（加粗）、中文、一个朗读按钮
+    h += '<div class="ex"><b>' + esc(x.en) + '</b><div class="exzh">' + esc(x.zh) + '</div>' +  // esc() 转义特殊字符，防止例句里的 < > 弄乱页面
+         '<div style="margin-top:6px"><button class="btn say" style="padding:6px 12px;font-size:15px" onclick="say(' + jsq(x.en) + ',false)">🔊 读这句</button></div></div>';  // say() 是学习台原有的朗读函数，jsq() 把句子包成安全的 JS 字符串
+  });
+  h += '<div style="margin-top:12px"><b>🤖 小测验：</b>' + esc(a.quiz.question) + '</div><div id="aiQuiz">';  // 题目，下面放选项按钮
+  a.quiz.options.forEach(function(o, i){  // 每个选项一个按钮，i 是它的位置（0 到 3）
+    h += '<button class="btn" style="margin-top:6px" onclick="aiPick(this,' + i + ',' + a.quiz.answer + ')">' + esc(o) + '</button>';  // 点击时把"点的是第几个"和"正确答案是第几个"交给 aiPick
+  });
+  return h + '</div></div>';  // 补上两个结尾标签，返回拼好的 HTML
+}
+function aiPick(btn, i, ans){  // btn 是被点的按钮，i 是它的位置，ans 是正确答案的位置
+  document.querySelectorAll('#aiQuiz button').forEach(function(b, k){  // 遍历 4 个选项按钮
+    b.disabled = true;  // 点过一次后全部不能再点
+    if(k === ans) b.className = 'btn ok';  // 正确答案变绿（ok 是学习台原有的绿色样式）
+  });
+  if(i !== ans) btn.className = 'btn no';  // 点错了，被点的那个变红
+}
+function startTest(){ encDone = true; revealed = false; hintOn = false; renderCard(); }
+
+/* ---------- 评分 / 撤销 / 改分 / 记录 ---------- */
+var undoStack = [];
+var UNDO_MAX = 30;
+var sessId = 0;
+var recapDay = null;
+var GNAME = { 1:"不会", 2:"有点难", 3:"会了", 4:"太简单" };
+var GCOLOR = { 1:"#cf3a3a", 2:"#b5771a", 3:"#158a4c", 4:"#7145c9" };
+
+function snapCard(en){ return DB.cards[en] ? JSON.parse(JSON.stringify(DB.cards[en])) : 0; }
+function restoreCard(en, b){ if(b === 0 || b === null || b === undefined) delete DB.cards[en]; else DB.cards[en] = JSON.parse(JSON.stringify(b)); }
+function dayLog(T){ var o = DB.log[T] || (DB.log[T] = { n:0, r:0, b:0, h:0, g:0, e:0 }); if(!o.items) o.items = []; return o; }
+function recountDay(T){
+  var o = DB.log[T]; if(!o || !o.items) return;
+  o.n = o.r = o.b = o.h = o.g = o.e = 0;
+  o.items.forEach(function(it){
+    if(it.n) o.n++; else o.r++;
+    if(it.g===1) o.b++; else if(it.g===2) o.h++; else if(it.g===3) o.g++; else o.e++;
+  });
+}
+/* 只保留最近 90 天的明细，更早的只留计数 */
+function pruneLog(){
+  var keys = Object.keys(DB.log).sort();
+  if(keys.length <= 90) return;
+  keys.slice(0, keys.length - 90).forEach(function(k){ if(DB.log[k] && DB.log[k].items) delete DB.log[k].items; });
+}
+
+function grade(g){
+  if(qi >= Q.length) return;
+  var d = Q[qi]; if(!d) return;
+  var T = todayStr();
+  var before = snapCard(d.en);
+  var o = dayLog(T);
+  var r = review(d.en, g);
+  var ts = Date.now();
+  /* 计数快照必须在自增之前取，否则撤销时等于没还原 */
+  var prev = { n:o.n, r:o.r, b:o.b, h:o.h, g:o.g, e:o.e, SS:Object.assign({}, SS) };
+  o.items.push({ e: d.en, g: g, n: r.wasNew ? 1 : 0, ts: ts, b: before });
+  if(r.wasNew) o.n++; else o.r++;
+  if(g===1){ o.b++; SS.no++; } else if(g===2){ o.h++; SS.hard++; }
+  else if(g===3){ o.g++; SS.ok++; } else { o.e++; SS.easy++; }
+
+  undoStack.push({
+    T: T, idx: o.items.length - 1, en: d.en, before: before,
+    qi: qi, Q: Q.slice(), revealed: revealed, encDone: encDone, sess: sessId,
+    SS: prev.SS,
+    counts: { n:prev.n, r:prev.r, b:prev.b, h:prev.h, g:prev.g, e:prev.e }
+  });
+  if(undoStack.length > UNDO_MAX) undoStack.shift();
+  pruneLog(); saveDB();
+
+  if(g === 1){
+    var item = Q.splice(qi,1)[0];
+    Q.splice(Math.min(Q.length, qi+4), 0, item);
+    revealed = false; encDone = false; hintOn = false; renderCard(); return;
+  }
+  qi++; revealed = (mode === "learn"); encDone = false; hintOn = false;
+  renderCard();
+}
+
+function undoLast(){
+  if(!undoStack.length){ toast("没有可撤销的操作"); return; }
+  var a = undoStack.pop();
+  var o = dayLog(a.T);
+  if(o.items[a.idx] && o.items[a.idx].e === a.en) {
+    o.items.splice(a.idx, 1);
+  } else {
+    for(var i = o.items.length - 1; i >= 0; i--){
+      if(o.items[i].e === a.en){ o.items.splice(i, 1); break; }
+    }
+  }
+  restoreCard(a.en, a.before);
+  /* 计数必须是「重算」而不是「减一」，因为中间可能已被改过分 */
+  recountDay(a.T);
+  SS = a.SS || SS;
+  if(a.sess === sessId){
+    Q = a.Q; qi = a.qi; revealed = a.revealed; encDone = a.encDone;
+  }
+  saveDB();
+  renderCard(); renderToday(); renderStats();
+  if(recapDay) renderRecap();
+  toast("已撤销：" + a.en + "　（还可再退 " + undoStack.length + " 步）");
+}
+
+/* 改今天某次评分：回到该卡今天第一次评分前的状态，按新评分重放 */
+function regrade(en, occ, newG){
+  var T = recapDay || todayStr();
+  var o = DB.log[T];
+  if(!o || !o.items) return;
+  var mine = o.items.filter(function(it){ return it.e === en; });
+  if(!mine.length) return;
+  /* 回到这张卡今天第一次评分之前，再按新评分重放 */
+  restoreCard(en, mine[0].b);
+  mine.forEach(function(it, k){
+    var g = (k === occ) ? newG : it.g;
+    var b = snapCard(en);
+    review(en, g);
+    it.g = g;
+    it.b = b;
+  });
+  recountDay(T);
+  undoStack = [];
+  openGrade = "";
+  saveDB();
+  toast("已改成「" + GNAME[newG] + "」，复习排期已按新评分重算");
+  renderRecap(); renderToday(); renderStats();
+}
+
+function recapTable(items, withRegrade, listKey){
+  if(!items.length) return "<p class=\"muted\">无</p>";
+  var T = recapDay || todayStr();
+  var OM = occMap(T);
+  var cols = withRegrade ? 5 : 4;
+  var t = "<table><tr><th style=\"width:30%\">英文</th><th>中文</th><th style=\"width:80px\">当时评分</th>";
+  if(withRegrade) t += "<th style=\"width:110px\">改等级</th>";
+  t += "<th style=\"width:52px\">读</th></tr>";
+  items.forEach(function(x, i){
+    var d = BY_EN[x.e] || {};
+    var isQa = (d.t === "qa");
+    var label = isQa ? (d.q || x.e) : x.e;
+    var sub = isQa ? "<div class=\"muted\" style=\"font-size:13px\">课堂笔记问答</div>"
+                   : (d.ipa ? "<div class=\"ipa\" style=\"font-size:14px\">" + esc(d.ipa) + "</div>" : "");
+    var gid = listKey + ":" + i;
+    var isOpen = (openGrade === gid);
+    t += "<tr><td><b>" + esc(label) + "</b>" + sub + "</td>";
+    t += "<td>" + esc(isQa ? (d.a || "") : (d.zh || "")) + "</td>";
+    t += "<td style=\"color:" + (GCOLOR[x.g]||"#888") + ";font-weight:600\">" + (GNAME[x.g]||"?") + "</td>";
+    if(withRegrade){
+      t += "<td><button class=\"btn\" style=\"padding:3px 10px;font-size:14px;margin:0\" onclick=\"toggleGrade('" + gid + "')\">" +
+           (isOpen ? "收起" : "改等级") + " " + (isOpen ? "▴" : "▾") + "</button></td>";
+    }
+    t += "<td><button class=\"btn say\" style=\"padding:2px 9px;font-size:14px;margin:0\" onclick=\"say(" + jsq(x.e) + ",false)\">🔊</button></td></tr>";
+    if(isOpen){
+      var occ = OM.get(x); if(occ === undefined) occ = 0;
+      var exs = "";
+      if(!isQa){
+        exList(d).forEach(function(e2){
+          var e3 = typeof e2 === "string" ? e2 : (e2.e || "");
+          var z3 = typeof e2 === "string" ? "" : (e2.z || "");
+          if(e3) exs += "<div class=\"muted\" style=\"font-size:15px;margin-top:5px\">· " + esc(e3) +
+                 (z3 ? "<br><span style=\"color:#8b95a3;padding-left:12px\">" + esc(z3) + "</span>" : "") + "</div>";
+        });
+      }
+      t += "<tr><td colspan=\"" + cols + "\" style=\"background:#f8fafc\">" +
+        "<div style=\"padding:4px 2px 10px\"><b>把这一次的评分改成：</b><br>" +
+        [1,2,3,4].map(function(k){
+          return "<button class=\"btn\" style=\"margin:7px 7px 0 0;" +
+            (k === x.g ? "background:#14161a;color:#fff;border-color:#14161a" : "") +
+            "\" onclick=\"regrade(" + jsq(x.e) + "," + occ + "," + k + ")\">" + GKICON[k] + " " + GNAME[k] + "</button>";
+        }).join("") +
+        "</div>" + exs + "</td></tr>";
+    }
+  });
+  return t + "</table>";
+}
+
+var GKICON = { 1:"❌", 2:"😐", 3:"✅", 4:"😎" };
+var openGrade = "";
+/* 每张卡今天被评过几次、这是第几次 —— 用来精确定位要改哪一次 */
+function occMap(T){
+  var o = DB.log[T], m = new Map(), cnt = {};
+  if(!o || !o.items) return m;
+  o.items.forEach(function(it){
+    var k = String(it.e);
+    m.set(it, cnt[k] || 0);
+    cnt[k] = (cnt[k] || 0) + 1;
+  });
+  return m;
+}
+function toggleGrade(gid){ openGrade = (openGrade === gid) ? "" : gid; renderRecap(); renderToday(); }
+function openRecapToday(){ recapDay = todayStr(); goTab("recap"); }
+function shiftRecap(n){
+  var T = todayStr();
+  recapDay = (n === 0) ? T : addDays(recapDay || T, n);
+  renderRecap();
+}
+function renderRecap(){
+  var box = document.getElementById("recapBox");
+  if(!box) return;
+  var T = recapDay || todayStr();
+  recapDay = T;
+  document.getElementById("recapDate").textContent = T + (T === todayStr() ? "（今天）" : "");
+  var o = DB.log[T];
+  var items = (o && o.items) ? o.items : [];
+  var hint = document.getElementById("recapHint");
+  if(!items.length){
+    var cnt = o ? ((o.n || 0) + (o.r || 0)) : 0;
+    if(cnt > 0){
+      box.innerHTML = "<div class=\"warn\">这一天完成了 <b>" + cnt + " 张</b>，但没有保存是哪些词。<br>" +
+        "「学习记录」是后加的功能 —— <b>在它上线之前完成的批次只记了数量，没记内容，补不回来</b>。<br>" +
+        "<b>从下一批开始就会有完整明细。</b></div>";
+    } else {
+      box.innerHTML = "<p class=\"muted\">这一天没有学习记录。明细只保留最近 90 天。</p>";
+    }
+    hint.textContent = "";
+    return;
+  }
+  hint.textContent = "点某个词的「改等级 ▾」，会展开这一整张卡（含例句和四个等级按钮），改完系统会按新评分重算它的复习时间。";
+  var news = items.filter(function(x){ return x.n; });
+  var revs = items.filter(function(x){ return !x.n; });
+  box.innerHTML =
+    "<h2 style=\"margin-top:0\">🆕 今天新学的（" + news.length + "）</h2>" +
+    "<p class=\"muted\">今天第一次见到的词。睡前再过一遍，第二天早上复习效果最好。</p>" +
+    recapTable(news, true, "rn") +
+    "<h2 style=\"margin-top:26px\">🔁 今天复习的（" + revs.length + "）</h2>" +
+    "<p class=\"muted\">以前学过、今天又被抽到的词。</p>" +
+    recapTable(revs, true, "rr");
+}
+
+/* ============================================================
+   统计
+   ============================================================ */
+function counts(){
+  var known = 0, learned = 0;
+  ENTRIES.forEach(function(d){
+    var c = DB.cards[d.en];
+    if(!c || !c.st) return;
+    learned++;
+    if(c.st === 2 && (c.s||0) >= 21) known++;
+  });
+  return { total: ENTRIES.length, learned: learned, known: known };
+}
+function dueOn(day){
+  var n = 0;
+  ENTRIES.forEach(function(d){ var c = DB.cards[d.en]; if(c && c.st > 0 && c.due === day) n++; });
+  return n;
+}
+function nextDueSoon(days){
+  var T = todayStr(), n = 0;
+  for(var i=1;i<=days;i++) n += dueOn(addDays(T,i));
+  return n;
+}
+function streak(){
+  var T = todayStr(), cur = T, n = 0, Lt = DB.log[T];
+  if(!Lt || (Lt.n + Lt.r) === 0) cur = addDays(T,-1);
+  for(var i=0;i<400;i++){
+    var L = DB.log[cur];
+    if(L && (L.n + L.r) > 0){ n++; cur = addDays(cur,-1); } else break;
+  }
+  return n;
+}
+function isWeekend(day){
+  var p = String(day).split('-').map(Number);
+  var w = new Date(p[0], p[1]-1, p[2]).getDay();
+  return w === 0 || w === 6;
+}
+
+function renderToday(){
+  var T = todayStr(), sp = splitPool(pickPool(), T), quota = newQuota(T);
+  var L = DB.log[T] || { n:0, r:0 }, cc = counts();
+  var nNew = Math.min(quota, sp.fresh.length), nRev = Math.min(sp.due.length, DB.set.maxReview);
+
+  document.getElementById('tNew').innerHTML = nNew + '<span>新词</span>';
+  document.getElementById('tDue').innerHTML = sp.due.length + '<span>到期复习</span>';
+  document.getElementById('tDone').innerHTML = (L.n + L.r) + '<span>今天已完成</span>';
+  document.getElementById('tTotal').innerHTML = cc.total + '<span>词库总量</span>';
+
+  var target = nNew + nRev, done = L.n + L.r;
+  document.getElementById('tBar').style.width = (target ? Math.min(100, Math.round(done/target*100)) : 100) + '%';
+
+  var msg;
+  if(target === 0) msg = '今天没有任务了。未来 7 天还有 ' + nextDueSoon(7) + ' 张到期。去休息，或在设置里调大每天新词量。';
+  else if(done >= target) msg = '✅ 今天的 ' + target + ' 张已经做完了。不要加量，明天再来。';
+  else msg = '今天要做 ' + target + ' 张：' + nNew + ' 张新词 + ' + nRev + ' 张复习。已完成 ' + done + ' 张。';
+  document.getElementById('tMsg').textContent = msg;
+
+  var h = '<tr><th>日期</th><th>预计到期</th><th></th></tr>';
+  for(var i=1;i<=7;i++){
+    var day = addDays(T,i), n = dueOn(day);
+    h += '<tr><td>' + day + (isWeekend(day) ? ' <span class="muted">周末</span>' : '') + '</td><td>' + n + ' 张</td><td class="muted">' +
+         (n > 200 ? '偏多，可降低新词量' : '') + '</td></tr>';
+  }
+  document.getElementById('forecast').innerHTML = h;
+
+  var o = DB.log[T];
+  var items = (o && o.items) ? o.items : [];
+  var tr = document.getElementById('todayRecap');
+  if(tr){
+    if(!items.length){ tr.innerHTML = '<p class="muted">今天还没开始。点上面的按钮开始今天的学习。</p>'; }
+    else {
+      var news = items.filter(function(x){ return x.n; });
+      var revs = items.filter(function(x){ return !x.n; });
+      tr.innerHTML = '<p class="muted">今天学了 ' + news.length + ' 个新词、复习了 ' + revs.length + ' 个。' +
+        '点右边按钮可以改评分；完整明细在「📋 记录」页。</p>' +
+        '<h3>🆕 新学（' + news.length + '）</h3>' + recapTable(news, true, 'tn') +
+        '<h3>🔁 复习（' + revs.length + '）</h3>' + recapTable(revs, true, 'tr');
+    }
+  }
+}
+
+function renderStats(){
+  var cc = counts();
+  document.getElementById('kTotal').innerHTML = cc.total + '<span>总词条</span>';
+  document.getElementById('kLearned').innerHTML = cc.learned + '<span>已学过</span>';
+  document.getElementById('kKnown').innerHTML = cc.known + '<span>已稳固(≥21天)</span>';
+  document.getElementById('kStreak').innerHTML = streak() + '<span>连续天数</span>';
+  document.getElementById('barKnown').style.width = (cc.total ? (cc.known/cc.total*100) : 0) + '%';
+
+  var S = [], R = [], leech = 0;
+  ENTRIES.forEach(function(d){
+    var c = DB.cards[d.en];
+    if(!c || !c.st) return;
+    S.push(c.s||0);
+    R.push(retrievability(c.last ? Math.max(0,diffDays(c.last, todayStr())) : 0, c.s||1));
+    if((c.lapses||0) >= (DB.set.leechAt||8)) leech++;
+  });
+  function avg(a){ return a.length ? (a.reduce(function(x,y){return x+y;},0)/a.length) : 0; }
+  function med(a){ if(!a.length) return 0; var b=a.slice().sort(function(x,y){return x-y;}); return b[Math.floor(b.length/2)]; }
+  document.getElementById('modelStats').innerHTML =
+    '<span class="metric">平均记忆稳定性 <b>' + avg(S).toFixed(1) + ' 天</b></span>' +
+    '<span class="metric">中位稳定性 <b>' + med(S).toFixed(1) + ' 天</b></span>' +
+    '<span class="metric">平均可回忆度 <b>' + Math.round(avg(R)*100) + '%</b>（目标 ' + Math.round(DB.set.dr*100) + '%）</span>' +
+    '<span class="metric">难点卡 <b>' + leech + ' 张</b></span>' +
+    '<p class="muted" style="margin-top:8px">可回忆度长期稳定在目标值附近 = 调度正常。持续偏低 = 该调高期望保持率或减少新词量。</p>';
+
+  document.getElementById('modelStats').innerHTML += '<p class="muted" style="margin-top:10px">存档：' +
+    Object.keys(DB.cards || {}).length + ' 张卡有记录 \u00b7 ' + Object.keys(DB.log || {}).length + ' 天历史 \u00b7 ' +
+    Math.round(RAW_LEN / 1024) + ' KB \u00b7 状态 ' +
+    ({ ok:'正常', empty:'本机无存档', unreadable:'读取失败（已暂停写入）' }[LOAD_STATE] || LOAD_STATE) + '</p>';
+  var T = todayStr(), h = '<tr><th>日期</th><th>新词</th><th>复习</th><th>不会</th><th>有点难</th><th>会了</th><th>太简单</th></tr>';
+  for(var i=13;i>=0;i--){
+    var day = addDays(T,-i), L = DB.log[day];
+    h += '<tr><td>' + day + '</td>' + (L
+      ? '<td>'+L.n+'</td><td>'+L.r+'</td><td>'+(L.b||0)+'</td><td>'+(L.h||0)+'</td><td>'+(L.g||0)+'</td><td>'+(L.e||0)+'</td>'
+      : '<td class="muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td><td class="muted">—</td>') + '</tr>';
+  }
+  document.getElementById('histTable').innerHTML = h;
+
+  var byCat = {};
+  ENTRIES.forEach(function(d){
+    var o = byCat[d.c] || (byCat[d.c] = { t:0, l:0, k:0 });
+    o.t++;
+    var c = DB.cards[d.en];
+    if(c && c.st){ o.l++; if(c.st===2 && (c.s||0) >= 21) o.k++; }
+  });
+  var h2 = '<tr><th>分类</th><th>已稳固</th><th>学过</th><th>总数</th><th>进度</th></tr>';
+  Object.keys(byCat).sort().forEach(function(c){
+    var o = byCat[c];
+    h2 += '<tr><td>'+esc(c)+'</td><td>'+o.k+'</td><td>'+o.l+'</td><td>'+o.t+'</td><td>'+Math.round(o.k/o.t*100)+'%</td></tr>';
+  });
+  document.getElementById('catTable').innerHTML = h2;
+
+  var parts = window.DECK_PARTS || {}, keys = Object.keys(parts).sort();
+  var h3 = '<tr><th>分片文件</th><th>条目数</th></tr>';
+  keys.forEach(function(k){ h3 += '<tr><td>'+esc(k)+'</td><td>'+(parts[k]||[]).length+'</td></tr>'; });
+  h3 += '<tr><td colspan="2" class="muted">合计 ' + cc.total + ' 条（已去重）</td></tr>';
+  document.getElementById('partTable').innerHTML = h3;
+}
+
+/* ============================================================
+   速查
+   ============================================================ */
+function setFilter(v, el){
+  document.getElementById('kwbox').value = v;
+  document.querySelectorAll('#catPills .pill').forEach(function(b){ b.classList.remove('on'); });
+  if(el) el.classList.add('on');
+  renderBrowse();
+}
+function renderBrowse(){
+  var box = document.getElementById('browseBox');
+  var kw = (document.getElementById('kwbox').value || '').trim().toLowerCase();
+  var list = ENTRIES.filter(function(d){
+    if(!kw) return true;
+    var hay = (d.en + ' ' + d.zh + ' ' + d.c).toLowerCase();
+    exList(d).forEach(function(x){ hay += ' ' + (typeof x === 'string' ? x : ((x.e||'') + ' ' + (x.z||''))); });
+    return hay.toLowerCase().indexOf(kw) >= 0;
+  });
+  if(!list.length){ box.innerHTML = '<p class="muted">没有匹配。</p>'; return; }
+  var by = {};
+  list.forEach(function(d){ (by[d.c] = by[d.c] || []).push(d); });
+  var h = '';
+  Object.keys(by).sort().forEach(function(c){
+    h += '<h2 style="margin:22px 0 8px;font-size:19px">' + esc(c) + ' <span class="muted" style="font-weight:400">(' + by[c].length + ')</span></h2>';
+    h += '<table><tr><th style="width:26%">英文</th><th style="width:17%">音标</th><th>中文 / 例句</th><th style="width:66px">发音</th></tr>';
+    by[c].forEach(function(d){
+      h += '<tr><td><b>' + esc(d.en) + '</b></td><td class="ipa" style="font-size:16px">' + esc(d.ipa||'') + '</td><td>' + esc(d.zh);
+      exList(d).forEach(function(x){
+        var e = typeof x === 'string' ? x : (x.e||''), z = typeof x === 'string' ? '' : (x.z||'');
+        if(e) h += '<div class="muted" style="font-size:15px;margin-top:5px">· ' + esc(e) + (z ? '<br><span style="color:#8b95a3;padding-left:10px">' + esc(z) + '</span>' : '') + '</div>';
+      });
+      h += '</td><td><button class="btn say" style="padding:6px 12px;font-size:15px;margin:0" onclick="say(' + jsq(d.en) + ',false)">🔊</button></td></tr>';
+    });
+    h += '</table>';
+  });
+  box.innerHTML = h;
+}
+
+/* ============================================================
+   设置
+   ============================================================ */
+function fillSettings(){
+  document.getElementById('setDr').value = DB.set.dr;
+  document.getElementById('setNew').value = DB.set.newPerDay;
+  document.getElementById('setRev').value = DB.set.maxReview;
+  document.getElementById('setOrder').value = DB.set.order;
+  document.getElementById('setRot').checked = !!DB.set.rotateEx;
+  document.getElementById('setInt').checked = !!DB.set.interleave;
+  document.getElementById('setLeech').value = DB.set.leechAt;
+  document.getElementById('setHintMode').value = DB.set.hintMode;
+  document.getElementById('setIpa').checked = !!DB.set.showIpa;
+  document.getElementById('setAuto').checked = !!DB.set.autoplay;
+  document.getElementById('setRate').value = DB.set.rate;
+  fillVoiceSelect();
+  updateHint();
+}
+function updateHint(){
+  var n = DB.set.newPerDay, dr = DB.set.dr;
+  var daily = Math.round(intervalFor(30, dr));
+  document.getElementById('drHint').textContent = '→ 记忆稳定性 30 天的卡，会在第 ' + daily + ' 天复习';
+  document.getElementById('setHint').textContent =
+    '按现在设置：每天约 ' + n + ' 张新词，复习量会像滚雪球一样慢慢变大（第 1 周每天约 ' + n +
+    ' 张，第 4 周约 ' + (n*2) + ' 张，第 8 周约 ' + (n*3) + ' 张）。词库共 ' + ENTRIES.length +
+    ' 条，按 ' + n + ' 张/天 大约 ' + Math.ceil(ENTRIES.length/n) + ' 天过完第一轮。';
+}
+function saveSet(){
+  DB.set.dr = Math.max(0.75, Math.min(0.97, parseFloat(document.getElementById('setDr').value) || 0.90));
+  DB.set.newPerDay = Math.max(1, Math.min(100, parseInt(document.getElementById('setNew').value,10) || 15));
+  DB.set.maxReview = Math.max(10, Math.min(999, parseInt(document.getElementById('setRev').value,10) || 120));
+  DB.set.order = document.getElementById('setOrder').value;
+  DB.set.rotateEx = document.getElementById('setRot').checked;
+  DB.set.interleave = document.getElementById('setInt').checked;
+  DB.set.leechAt = Math.max(3, Math.min(20, parseInt(document.getElementById('setLeech').value,10) || 8));
+  DB.set.hintMode = document.getElementById('setHintMode').value;
+  DB.set.showIpa = document.getElementById('setIpa').checked;
+  DB.set.autoplay = document.getElementById('setAuto').checked;
+  DB.set.rate = Math.max(0.5, Math.min(1.2, parseFloat(document.getElementById('setRate').value) || 0.9));
+  saveDB(); fillSettings(); renderToday();
+}
+function exportAll(){
+  var blob = new Blob([JSON.stringify({ saved:new Date().toISOString(), version:'v3-FSRS6', set:DB.set, cards:DB.cards, log:DB.log }, null, 1)], { type:'application/json' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '英语进度备份-' + todayStr() + '.json';
+  a.click();
+}
+function resetAll(){
+  if(!confirm('确定清空全部学习进度？词库不会删，但这个操作不能撤销。')) return;
+  DB = { set: Object.assign({}, DEFAULTS, DB.set), cards:{}, log:{} };
+  saveDB(); renderToday(); renderStats();
+}
+
+/* ============================================================
+   发音
+   ============================================================ */
+var voices = [], gbVoice = null, ALL_VOICES = [];
+var LAST_SPEECH_ERR = '';
+var UA_READY = false;   /* Chrome 不允许在用户点击页面前自动发声 */
+
+function paintVoiceBar(){
+  var bar = document.getElementById('voicebar');
+  if(!bar) return;
+  var nA = audioCount();
+  if(nA){
+    var miss = audioMissing();
+    bar.innerHTML = '发音引擎：✅ <b>本地音频</b> ' + nA + ' 条（' + esc(window.AUDIO_VOICE || '') + '，离线也能播）' +
+      (miss > 0 ? '；⚠️ 还有 <b>' + miss + '</b> 条词句没生成，运行「生成发音.ps1」补上，补之前这些用浏览器语音'
+                : '；词库里的词句全部都有');
+    return;
+  }
+  if(!window.speechSynthesis){ bar.innerHTML = '发音引擎：<b>这个浏览器不支持语音合成</b>'; return; }
+  if(!ALL_VOICES.length){
+    bar.innerHTML = '发音引擎：系统里<b>一个语音都没有</b>' +
+      (UA_READY ? ' —— 到「\u2699\ufe0f 设置 → \ud83d\udd0d 发音诊断」看原因'
+                : ' —— <b>先点一下页面任意位置</b>再试');
+    return;
+  }
+  if(!voices.length){
+    bar.innerHTML = '发音引擎：\u26a0\ufe0f 有 ' + ALL_VOICES.length +
+      ' 个语音，但<b>没有英语的</b> —— 到「\u2699\ufe0f 设置 → \ud83d\udd0d 发音诊断」看原因';
+    return;
+  }
+  var gb = voices.filter(function(v){ return /en[-_]GB/i.test(v.lang); });
+  var chosen = pickVoice();
+  bar.innerHTML = gb.length
+    ? '发音引擎：\u2705 英音 <b>' + esc(chosen ? chosen.name : '') + '</b>（英语 ' + voices.length + ' 个 / 共 ' + ALL_VOICES.length + ' 个）'
+    : '发音引擎：\u26a0\ufe0f 只有非英音 <b>' + esc(chosen ? chosen.name : '') + '</b>（' + (chosen ? chosen.lang : '') + '），建议用 Microsoft Edge 打开';
+}
+
+function refreshVoices(){
+  try { ALL_VOICES = speechSynthesis.getVoices() || []; } catch(e){ ALL_VOICES = []; }
+  voices = ALL_VOICES.filter(function(v){ return /^en/i.test(v.lang); });
+  var gb = voices.filter(function(v){ return /en[-_]GB/i.test(v.lang); });
+  /* 自动模式：Edge 的神经语音（Natural）> Chrome 的 Google 在线英音 > 任意英音 */
+  gbVoice = gb.filter(function(v){ return /natural/i.test(v.name); })[0] ||
+            gb.filter(function(v){ return !v.localService || /google/i.test(v.name); })[0] ||
+            gb[0] || voices[0] || null;
+  paintVoiceBar();
+  if(typeof fillVoiceSelect === 'function') fillVoiceSelect();
+  if(typeof renderVoiceTests === 'function') renderVoiceTests();
+  return ALL_VOICES.length;
+}
+function loadVoices(){ return refreshVoices(); }
+
+function pickVoice(){
+  var want = DB.set.voiceURI;
+  if(want){
+    var m = ALL_VOICES.filter(function(v){ return v.voiceURI === want; })[0];
+    if(m) return m;
+  }
+  return gbVoice || ALL_VOICES[0] || null;
+}
+
+var SPEAK_WATCH = null;
+var SPEAK_SEQ = 0;            /* 每次发音一个编号：被 cancel 掉的旧句子的回调不许动新句子的看门狗 */
+var FALLBACK_TOASTED = false; /* 临时降级的提示每次打开页面只弹一次 */
+function localFallback(){
+  var loc = voices.filter(function(x){ return x.localService; });
+  return loc.filter(function(x){ return /en[-_]GB/i.test(x.lang); })[0] || loc[0] || null;
+}
+function sayWith(text, v, slow){
+  if(!text) return;
+  if(!window.speechSynthesis){ toast('这个浏览器不支持语音合成'); return; }
+  stopAudio();
+  var seq = ++SPEAK_SEQ;
+  var online = !!(v && !v.localService);
+  var u = new SpeechSynthesisUtterance(String(text));
+  u.lang = v ? v.lang : 'en-GB';
+  if(v) u.voice = v;
+  var r = parseFloat(DB.set.rate);
+  if(!isFinite(r) || r < 0.1 || r > 3) r = 0.9;   /* 语速越界会让 speak 静默失败 */
+  u.rate = slow ? Math.max(0.5, r - 0.25) : r;
+  var settled = false;
+  LAST_SPEECH_ERR = '';
+  var settle = function(){
+    if(settled) return false;
+    settled = true;
+    if(seq === SPEAK_SEQ && SPEAK_WATCH){ clearTimeout(SPEAK_WATCH); SPEAK_WATCH = null; }
+    return seq === SPEAK_SEQ;
+  };
+  /* 在线语音失败 → 只有这一句临时用本地语音读，不改设置，下一句照样先试在线 */
+  var fallback = function(why){
+    var loc = online ? localFallback() : null;
+    if(loc){
+      if(!FALLBACK_TOASTED){ FALLBACK_TOASTED = true; toast('在线语音这次没连上，这句临时用本地语音读；下一句仍先试在线'); }
+      sayWith(text, loc, slow);
+      LAST_SPEECH_ERR = why + ' → 这句临时改用本地 ' + loc.name;   /* sayWith 会清空，所以放在后面 */
+      paintVoiceBar();
+      return;
+    }
+    LAST_SPEECH_ERR = why;
+    paintVoiceBar();
+    toast('这个语音没出声 —— 到设置里点「逐个试听」挑一个能响的');
+  };
+  u.onstart = function(){ settle(); };
+  u.onend = function(){ settle(); };
+  u.onerror = function(ev){
+    var err = (ev && ev.error) ? ev.error : 'error';
+    if(!settle()) return;                                   /* 已被新句子顶掉，不管 */
+    if(err === 'interrupted' || err === 'canceled') return; /* 我们自己 cancel 的，不算错 */
+    fallback('出错：' + err + (online ? '（在线语音）' : ''));
+  };
+  try {
+    speechSynthesis.cancel();
+    if(speechSynthesis.paused) speechSynthesis.resume();   /* Chrome 卡在暂停态的老毛病 */
+    speechSynthesis.speak(u);
+  } catch(e){ settle(); LAST_SPEECH_ERR = (e && e.message) ? e.message : String(e); return; }
+
+  /* 看门狗：在线语音要先联网取音频，冷启动常超过 1.5 秒，所以给 4 秒；本地语音 1.5 秒 */
+  var waitMs = online ? 4000 : 1500;
+  if(SPEAK_WATCH) clearTimeout(SPEAK_WATCH);
+  SPEAK_WATCH = setTimeout(function(){
+    if(!settle()) return;
+    fallback((waitMs / 1000) + ' 秒内没有启动' + (online ? '（在线语音，这次没连上服务器）' : ''));
+  }, waitMs);
+}
+/* 本地音频：生成发音.ps1 预先生成的 mp3（audio\index.js 里是「原文 → 文件名」）。
+   有就优先播文件，不依赖网络和浏览器语音；文件缺失或播放失败才退回 sayWith。 */
+var CUR_AUDIO = null;
+function audioCount(){ try { return window.AUDIO_INDEX ? Object.keys(window.AUDIO_INDEX).length : 0; } catch(e){ return 0; } }
+/* 词库里有多少词句还没有本地音频（课堂笔记同步进新词后会变多，提醒去补） */
+function audioMissing(){
+  var idx = window.AUDIO_INDEX;
+  if(!idx || !ENTRIES || !ENTRIES.length) return 0;
+  var seen = {}, miss = 0;
+  ENTRIES.forEach(function(d){
+    [d.en].concat((d.ex || []).map(function(x){ return x && x.e; })).forEach(function(t){
+      t = String(t || '').trim();
+      if(!t || seen[t]) return;
+      seen[t] = 1;
+      if(!idx[t]) miss++;
+    });
+  });
+  return miss;
+}
+function stopAudio(){ if(CUR_AUDIO){ try { CUR_AUDIO.pause(); } catch(e){} CUR_AUDIO = null; } }
+function playLocal(text, slow){
+  var f = window.AUDIO_INDEX && window.AUDIO_INDEX[String(text).trim()];
+  if(!f) return false;
+  stopAudio();
+  try { if(window.speechSynthesis) speechSynthesis.cancel(); } catch(e){}
+  var a = new Audio('audio/' + f);
+  var r = parseFloat(DB.set.rate);
+  if(!isFinite(r) || r < 0.1 || r > 3) r = 0.9;
+  /* 音频本身是正常语速；语速设置 0.9 = 原速，慢速再减 0.25（和浏览器语音一致） */
+  a.playbackRate = Math.max(0.5, Math.min(2, (slow ? Math.max(0.5, r - 0.25) : r) / 0.9));
+  CUR_AUDIO = a;
+  var done = false;
+  var fail = function(why){
+    if(done || CUR_AUDIO !== a) return;
+    done = true; CUR_AUDIO = null;
+    if(!ALL_VOICES.length) refreshVoices();
+    sayWith(text, pickVoice(), slow);
+    LAST_SPEECH_ERR = '本地音频 ' + f + ' 播放失败（' + why + '），这句改用浏览器语音';
+  };
+  a.onerror = function(){ fail('文件读不到'); };
+  a.onplaying = function(){ done = true; LAST_SPEECH_ERR = ''; };
+  try {
+    var p = a.play();
+    if(p && p.catch) p.catch(function(e){
+      if(e && e.name === 'NotAllowedError'){ done = true; return; }   /* 还没点过页面，浏览器不让出声，不算坏 */
+      if(e && e.name === 'AbortError') return;                       /* 被下一句顶掉 */
+      fail(e && e.name ? e.name : 'play 失败');
+    });
+  } catch(e){ fail(e && e.message ? e.message : String(e)); }
+  return true;
+}
+function say(text, slow){
+  if(!text) return;
+  if(playLocal(text, slow)) return;
+  if(!ALL_VOICES.length) refreshVoices();
+  sayWith(text, pickVoice(), slow);
+}
+
+function markUAReady(){ UA_READY = true; if(!ALL_VOICES.length) refreshVoices(); }
+document.addEventListener('pointerdown', markUAReady, true);
+document.addEventListener('keydown', markUAReady, true);
+
+function fillVoiceSelect(){
+  var sel = document.getElementById('setVoice');
+  if(!sel) return;
+  var cur = DB.set.voiceURI || '';
+  sel.innerHTML = '<option value="">自动（英音优先）</option>';
+  ALL_VOICES.forEach(function(v){
+    var o = document.createElement('option');
+    o.value = v.voiceURI;
+    o.textContent = v.name + '  [' + v.lang + ']' + (v.localService ? '' : ' 在线');
+    sel.appendChild(o);
+  });
+  sel.value = cur;
+}
+function onVoicePick(){
+  var sel = document.getElementById('setVoice');
+  DB.set.voiceURI = sel ? sel.value : '';
+  saveDB(); paintVoiceBar();
+  say('This is the voice you picked.', false);
+}
+function renderVoiceTests(){
+  var box = document.getElementById('voiceTestList');
+  if(!box) return;
+  if(!voices.length){ box.innerHTML = '<p class="muted" style="margin-top:8px">没有英语语音可试。</p>'; return; }
+  var h = '<p class="muted" style="margin:10px 0 2px"><b>逐个试听，哪个真出声就用哪个</b>（带「在线」的需要能连上 Google 服务器）：</p>';
+  voices.forEach(function(v, i){
+    var cur = (DB.set.voiceURI === v.voiceURI);
+    h += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:5px 0;border-bottom:1px solid var(--line)">' +
+      '<button class="btn" style="padding:3px 11px;font-size:14px;margin:0" onclick="tryVoice(' + i + ')">🔊 试听</button>' +
+      '<span style="font-size:15px">' + esc(v.name) + '</span>' +
+      '<span class="muted" style="font-size:13px">' + esc(v.lang) + (v.localService ? ' · 本地' : ' · 在线') + '</span>' +
+      (cur ? '<span style="font-size:13px;color:#158a4c;font-weight:600">✓ 正在用</span>'
+           : '<button class="btn" style="padding:2px 9px;font-size:13px;margin:0" onclick="useVoiceByIndex(' + i + ')">用这个</button>') +
+      '</div>';
+  });
+  box.innerHTML = h;
+}
+function tryVoice(i){
+  var v = voices[i]; if(!v) return;
+  sayWith('The kettle is on the hob. Shall I put it on?', v, false);
+}
+function useVoiceByIndex(i){
+  var v = voices[i]; if(!v) return;
+  DB.set.voiceURI = v.voiceURI;
+  saveDB(); paintVoiceBar(); renderVoiceTests();
+  sayWith('This is the voice you picked.', v, false);
+}
+function testVoice(){
+  refreshVoices();
+  if(!pickVoice()){ toast('没有可用语音，请看下面的诊断'); voiceDiag(); return; }
+  say('Hello. This is a test. The kettle is on the hob.', false);
+}
+
+function voiceDiag(){
+ try {
+  var lines = [];
+  var chosen = pickVoice();
+  var _ua = '', _proto = '';
+  try { _ua = String(navigator.userAgent); } catch(e){}
+  try { _proto = String(location.protocol); } catch(e){}
+  lines.push('浏览器      : ' + _ua.slice(0, 110));
+  lines.push('页面来源    : ' + _proto);
+  lines.push('语音接口    : ' + (window.speechSynthesis ? '有' : '没有'));
+  lines.push('已点过页面  : ' + UA_READY + '   （Chrome 在用户点击前不允许自动发声）');
+  lines.push('语音总数    : ' + ALL_VOICES.length);
+  lines.push('英语语音    : ' + voices.length);
+  lines.push('英音语音    : ' + voices.filter(function(v){ return /en[-_]GB/i.test(v.lang); }).length);
+  lines.push('当前选用    : ' + (chosen ? chosen.name + '  /  ' + chosen.lang : '（无）'));
+  lines.push('语速设置    : ' + DB.set.rate);
+  var curV = chosen;
+  lines.push('语音来源    : ' + (curV ? (curV.localService ? '本地（离线也能响）' : '在线（需要能连上 Google 服务器）') : '—'));
+  lines.push('本地音频    : ' + (audioCount() ? audioCount() + ' 条（' + (window.AUDIO_VOICE || '') + '），有音频的词句优先播文件' : '没有（运行 生成发音.ps1 生成）'));
+  lines.push('上次报错    : ' + (LAST_SPEECH_ERR || '无'));
+  lines.push('');
+  if(!ALL_VOICES.length){
+    lines.push('【一个语音都没有，可能原因】');
+    lines.push('  1) 还没点过页面 —— 先点一下再重新诊断');
+    lines.push('  2) Windows 没装英语语音包 —— 设置 → 时间和语言 → 语言和区域');
+    lines.push('     → 添加语言 English (United Kingdom)，安装时勾选「语音」');
+    lines.push('  3) 换了 Chrome 账号 —— 没登录 Google 就拿不到它的在线语音');
+    lines.push('  4) 换成 Microsoft Edge 打开本文件，Edge 自带英音，最省事');
+    lines.push('');
+  }
+  lines.push('【全部语音】');
+  ALL_VOICES.forEach(function(v, i){
+    lines.push('  ' + String(i + 1).padStart(2, ' ') + '. ' + v.name + '  [' + v.lang + ']' + (v.localService ? '  本地' : '  在线'));
+  });
+  var s = lines.join('\n');
+  var box = document.getElementById('voiceDiagBox');
+  if(box){
+    box.style.display = 'block';
+    box.textContent = s;
+    try { box.scrollIntoView({ block:'nearest' }); } catch(e){}
+  } else {
+    try { alert(s); } catch(e){}
+  }
+  try { console.log(s); } catch(e){}
+  return s;
+ } catch(err){
+  var msg = '诊断本身出错了：' + (err && err.message ? err.message : err);
+  try { alert(msg); } catch(e){}
+  return msg;
+ }
+}
+if(window.speechSynthesis) speechSynthesis.onvoiceschanged = loadVoices;
+function toast(msg){
+  var d = document.createElement('div');
+  d.textContent = msg;
+  d.style.cssText = 'position:fixed;left:50%;bottom:30px;transform:translateX(-50%);background:#14161a;color:#fff;padding:12px 20px;border-radius:10px;z-index:99';
+  document.body.appendChild(d);
+  setTimeout(function(){ d.remove(); }, 2600);
+}
+
+/* ============================================================
+   导航 / 初始化
+   ============================================================ */
+function goTab(t){
+  document.querySelectorAll('nav button').forEach(function(x){ x.classList.toggle('on', x.dataset.t === t); });
+  document.querySelectorAll('main section').forEach(function(s){ s.classList.toggle('on', s.id === t); });
+  if(t === 'stats') renderStats();
+  if(t === 'today') renderToday();
+  if(t === 'browse') renderBrowse();
+  if(t === 'settings') fillSettings();
+  if(t === 'recap') renderRecap();
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('nav button').forEach(function(b){ b.onclick = function(){ goTab(b.dataset.t); }; });
+
+document.addEventListener('keydown', function(e){
+  if(!document.getElementById('cards').classList.contains('on')) return;
+  var tag = (e.target && e.target.tagName) || '';
+  if(tag === 'INPUT' || tag === 'SELECT') return;
+  if(e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); if(!revealed) reveal(); return; }
+  if(e.key === '1'){ grade(1); return; }
+  if(e.key === '2'){ grade(2); return; }
+  if(e.key === '3'){ grade(3); return; }
+  if(e.key === '4'){ grade(4); return; }
+  if(e.key === 's' || e.key === 'S'){ if(Q[qi]) say(Q[qi].en, false); return; }
+  if(e.key === 'u' || e.key === 'U'){ undoLast(); return; }
+});
+
+var EXPECTED = ['00-base','01-phrasal-verbs','02-feelings-uk','03-food-shopping','04-housing-bills',
+  '05-health-nhs','06-money-admin','07-work-career','08-academic-writing','09-class-study',
+  '10-social','11-ai-ml-advanced','12-programming','13-maths-stats',
+  '15-base-expand-a','15-base-expand-b','15-base-expand-c',
+  '16-home-objects','17-describe-people','18-weather-nature','19-complaints-service',
+  '20-travel-hotel','21-news-society','22-sport-body','23-uk-culture',
+  '24-numbers-measures','25-research-practice'];
+
+function renderAll(){
+  var parts = window.DECK_PARTS || {};
+  document.getElementById('deckInfo').textContent = ENTRIES.length + ' 条 ｜ ' + Object.keys(parts).length + ' 个分片 ｜ FSRS-6';
+
+  var sel = document.getElementById('catSel');
+  var cats = Array.from(new Set(ENTRIES.map(function(d){ return d.c; }))).sort();
+  var cur = sel.value;
+  sel.innerHTML = '<option value="">全部</option>';
+  cats.forEach(function(c){ var o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); });
+  sel.value = cur;
+
+  var pills = document.getElementById('catPills');
+  pills.innerHTML = '';
+  var b0 = document.createElement('button');
+  b0.className = 'pill on'; b0.textContent = '全部';
+  b0.onclick = function(){ setFilter('', b0); };
+  pills.appendChild(b0);
+  cats.forEach(function(c){
+    var b = document.createElement('button');
+    b.className = 'pill'; b.textContent = c;
+    b.onclick = function(){ setFilter(c, b); };
+    pills.appendChild(b);
+  });
+
+  mode = DB.set.mode || 'zh2en';
+  document.querySelectorAll('.pill[data-mode]').forEach(function(b){ b.classList.toggle('on', b.dataset.mode === mode); });
+
+  renderToday(); renderStats(); renderBrowse(); fillSettings();
+}
+
+(function init(){
+  reloadDeck();
+  renderAll();
+  refreshVoices();
+  [100, 400, 1000, 2000, 3500].forEach(function(ms){ setTimeout(refreshVoices, ms); });
+
+  if(LOAD_STATE === 'unreadable'){
+    var w = document.createElement('div');
+    w.className = 'warn noprint';
+    w.style.cssText = 'max-width:960px;margin:16px auto 0;padding:14px 16px;font-size:17px';
+    w.innerHTML = '<b>\u26a0\ufe0f 本机有学习存档，但读不出来。</b><br>' +
+      '为避免把旧数据冲掉，<b>程序已暂停写入</b>（你现在的操作不会被保存）。<br>' +
+      '请先去「\u2699\ufe0f 设置 → \ud83d\udd0d 存档状态」看一眼，别继续学。';
+    document.querySelector('main').prepend(w);
+  }
+  if(LOAD_STATE === 'empty'){
+    var e = document.createElement('div');
+    e.className = 'info noprint';
+    e.style.cssText = 'max-width:960px;margin:16px auto 0;padding:13px 16px;font-size:16px';
+    e.innerHTML = '<b>这个浏览器账号里还没有学习存档。</b><br>' +
+      '如果你之前在别的浏览器、或同一个浏览器的<b>另一个账号</b>里学过 —— ' +
+      '<b>存档是按「浏览器 + 账号」分开存的</b>，换回那个账号就能看到，数据没丢。<br>' +
+      '<span class="muted">想以后不怕换环境：点「\ud83d\udcbe \u5bfc\u51fa\u5907\u4efd」存一个文件，' +
+      '需要时我可以帮你导回来。</span>';
+    document.querySelector('main').prepend(e);
+  }
+  var missing = EXPECTED.filter(function(k){ return !(window.DECK_PARTS && window.DECK_PARTS[k]); });
+  if(missing.length){
+    var d = document.createElement('div');
+    d.className = 'warn noprint';
+    d.style.cssText = 'max-width:960px;margin:16px auto 0;padding:12px 15px';
+    d.innerHTML = '<b>还有 ' + missing.length + ' 个词库分片没加载</b>（可能仍在生成中）：<br><span class="muted">' +
+      missing.join('、') + '</span><br><span class="muted">全部生成完后刷新页面（F5）即可。</span>';
+    document.querySelector('main').prepend(d);
+  }
+})();
+</script>
+</body>
+</html>
